@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;.\Item;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;.\Item;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,6 +156,8 @@
     <ClCompile Include="Framework\stdafx.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Framework\Variables.cpp" />
+    <ClCompile Include="Item\Computer.cpp" />
+    <ClCompile Include="Map\Map002.cpp" />
     <ClCompile Include="Map\Map001.cpp" />
     <ClCompile Include="guitar\Player.cpp" />
     <ClCompile Include="guitar\SaveData.cpp" />
@@ -164,8 +166,8 @@
     <ClCompile Include="guitar\SceneTitle.cpp" />
     <ClCompile Include="guitar\SpriteButton.cpp" />
     <ClCompile Include="guitar\TileMap.cpp" />
-    <ClCompile Include="guitar\Neko.cpp" />
-    <ClCompile Include="guitar\Remocon.cpp" />
+    <ClCompile Include="guitar\Niko.cpp" />
+    <ClCompile Include="Item\Remocon.cpp" />
     <ClCompile Include="UI\UiHud.cpp" />
     <ClCompile Include="UI\UiUpgrade.cpp" />
   </ItemGroup>
@@ -192,6 +194,8 @@
     <ClInclude Include="Framework\stdafx.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Framework\Variables.h" />
+    <ClInclude Include="Item\Computer.h" />
+    <ClInclude Include="Map\Map002.h" />
     <ClInclude Include="Map\Map001.h" />
     <ClInclude Include="guitar\Player.h" />
     <ClInclude Include="guitar\SaveData.h" />
@@ -200,8 +204,8 @@
     <ClInclude Include="guitar\SceneTitle.h" />
     <ClInclude Include="guitar\SpriteButton.h" />
     <ClInclude Include="guitar\TileMap.h" />
-    <ClInclude Include="guitar\Neko.h" />
-    <ClInclude Include="guitar\Remocon.h" />
+    <ClInclude Include="guitar\Niko.h" />
+    <ClInclude Include="Item\Remocon.h" />
     <ClInclude Include="UI\UiHud.h" />
     <ClInclude Include="UI\UiUpgrade.h" />
   </ItemGroup>

@@ -1,20 +1,15 @@
 #pragma once
 #include "stdafx.h"
+#include "Scene.h"
 
-class SpriteGo;
 class Niko;
-class Remocon;
-class Computer;
-class HitBox;
 
-class Map001 : public Scene
+class Map002 : public Scene
 {
 protected:
-	SpriteGo* map001;
+	SpriteGo* map002;
 	Animator animator;
 	Niko* niko;
-	Remocon* remocon;
-	Computer* computer;
 
 	float collisionDelay = 5.f;
 
@@ -22,11 +17,11 @@ protected:
 
 	bool isCollision = false;
 
-	sf::Vector2f mapScale = {2.f, 2.f};
-	
+	sf::Vector2f mapScale = { 2.f, 2.f };
+
 public:
-	Map001();
-	~Map001() = default;
+	Map002();
+	~Map002() = default;
 
 	void Init() override;
 	void Enter() override;

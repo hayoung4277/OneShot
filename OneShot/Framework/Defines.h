@@ -13,6 +13,7 @@ enum class SceneIds
 	None = -1,
 	Title,
 	Map001,
+	Map002,
 	Game,
 	Count,
 };

@@ -2,13 +2,13 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-class Remocon : public GameObject
+class Computer : public GameObject
 {
 public:
 	struct ClipInfo
 	{
-		std::string idle;
-		std::string move;
+	std::string idle;
+	std::string move;
 	};
 
 protected:
@@ -17,13 +17,13 @@ protected:
 
 	std::map<std::string, AnimationClip> temp;
 	std::vector<ClipInfo> clipInfos;
-	int cuurentClipIndex;
+	int currentClipIndex;
 
 	DebugBox debugBox;
 
 public:
-	Remocon(const std::string& name = "");
-	~Remocon() = default;
+	Computer(const std::string& name = "");
+	~Computer() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;

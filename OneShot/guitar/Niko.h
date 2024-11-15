@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-class Neko :  public GameObject
+class Niko :  public GameObject
 {
 public:
 	struct ClipInfo
@@ -29,8 +29,8 @@ protected:
 	DebugBox debugBox;
 
 public:
-	Neko(const std::string& name = "");
-	~Neko() = default;
+	Niko(const std::string& name = "");
+	~Niko() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -42,12 +42,15 @@ public:
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
 	void SetSpeed(float speed);
+	float GetSpeed() { return speed; }
 
 	void Init() override;
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void SetDebugBoxOutlineColor(const sf::Color& color);
 
 };
 

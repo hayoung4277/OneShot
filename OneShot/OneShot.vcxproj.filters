@@ -96,10 +96,16 @@
     <ClCompile Include="guitar\Animator.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\Neko.cpp">
+    <ClCompile Include="guitar\Niko.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\Remocon.cpp">
+    <ClCompile Include="Item\Remocon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Computer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map002.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,10 +206,16 @@
     <ClInclude Include="guitar\AniPlayer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\Neko.h">
+    <ClInclude Include="guitar\Niko.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\Remocon.h">
+    <ClInclude Include="Item\Remocon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Computer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map002.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

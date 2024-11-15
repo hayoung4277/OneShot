@@ -1,8 +1,9 @@
 #include "Map001.h"
 #include "Scene.h"
 #include "SpriteGo.h"
-#include "Neko.h"
+#include "Niko.h"
 #include "Remocon.h"
+#include "Computer.h"
 #include "HitBox.h"
 
 Map001::Map001()
@@ -13,8 +14,9 @@ Map001::Map001()
 void Map001::Init()
 {
 	map001 = AddGo(new SpriteGo("Graphics/Map/map001.png"));
-	niko = AddGo(new Neko("Niko"));
+	niko = AddGo(new Niko("Niko"));
 	remocon = AddGo(new Remocon("Remocon"));
+	computer = AddGo(new Computer("Computer"));
 
 	Scene::Init();
 
@@ -40,6 +42,13 @@ void Map001::Init()
 	remocon->SetScale({ 2.f, 2.f });
 	remocon->SetActive(true);
 
+	computer->sortingLayer = SortingLayers::Foreground;
+	computer->sortingOrder = 1;
+
+	computer->SetOrigin(Origins::MC);
+	computer->SetPosition({ 520.f, 370.f });
+	computer->SetScale({ 2.f, 2.f });
+
 	getRemocon = false;
 }
 
@@ -64,10 +73,15 @@ void Map001::Update(float dt)
 	sf::Sprite nikoSprite = niko->GetSprite();
 	sf::Sprite remoconSprite = remocon->GetSprite();
 
+	sf::FloatRect nikoFloatRect = niko->GetLocalBounds();
+	sf::FloatRect remoconFloatRect = remocon->GetLocalBounds();
+
 	if (Utils::CheckCollision(nikoSprite, remoconSprite))
 	{
 		isCollision = true;
 		collisionDelay -= dt;
+		niko->SetDebugBoxOutlineColor(sf::Color::Red);
+		remocon->SetDebugBoxOutlineColor(sf::Color::Red);
 	}
 	
 	if (isCollision == true && InputMgr::GetKey(sf::Keyboard::Left))
@@ -76,7 +90,6 @@ void Map001::Update(float dt)
 		{
 			isCollision = false;
 		}
-		
 	}
 	else if (isCollision == true && InputMgr::GetKey(sf::Keyboard::Up))
 	{
@@ -101,6 +114,7 @@ void Map001::Update(float dt)
 	if (isCollision == false)
 	{
 		niko->SetSpeed(100.f);
+		niko->SetDebugBoxOutlineColor(sf::Color::Green);
 	}
 
 	if (Utils::CheckCollision(nikoSprite, remoconSprite) && InputMgr::GetKeyDown(sf::Keyboard::Z))

@@ -2,12 +2,14 @@
 #include "SceneMgr.h"
 #include "SceneTitle.h"
 #include "Map001.h"
+#include "Map002.h"
 #include "SceneGame.h"
 
 void SceneMgr::Init()
 {
 	scenes.push_back(new SceneTitle());
 	scenes.push_back(new Map001());
+	scenes.push_back(new Map002());
 	scenes.push_back(new SceneGame());
 
 	for (auto scene : scenes)

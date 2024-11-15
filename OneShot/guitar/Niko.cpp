@@ -1,30 +1,30 @@
 #include "stdafx.h"
-#include "Neko.h"
+#include "Niko.h"
 
-Neko::Neko(const std::string& name)
+Niko::Niko(const std::string& name)
 	:GameObject(name)
 {
 }
 
-void Neko::SetPosition(const sf::Vector2f& pos)
+void Niko::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
 	body.setPosition(position);
 }
 
-void Neko::SetRotation(float angle)
+void Niko::SetRotation(float angle)
 {
 	rotation = angle;
 	body.setRotation(rotation);
 }
 
-void Neko::SetScale(const sf::Vector2f& s)
+void Niko::SetScale(const sf::Vector2f& s)
 {
 	scale = s;
 	body.setScale(scale);
 }
 
-void Neko::SetOrigin(Origins preset)
+void Niko::SetOrigin(Origins preset)
 {
 	originPreset = preset;
 	if (originPreset != Origins::Custom)
@@ -33,18 +33,18 @@ void Neko::SetOrigin(Origins preset)
 	}
 }
 
-void Neko::SetOrigin(const sf::Vector2f& newOrigin)
+void Niko::SetOrigin(const sf::Vector2f& newOrigin)
 {
 	originPreset = Origins::Custom;
 	origin = Utils::SetOrigin(body, originPreset);
 }
 
-void Neko::SetSpeed(float speed)
+void Niko::SetSpeed(float speed)
 {
 	this->speed = speed;
 }
 
-void Neko::Init()
+void Niko::Init()
 {
 	std::string textureId = "Graphics/Characters/niko.png";
 
@@ -142,18 +142,18 @@ void Neko::Init()
 	animator.SetTarget(&body);
 }
 
-void Neko::Release()
+void Niko::Release()
 {
 }
 
-void Neko::Reset()
+void Niko::Reset()
 {
 	body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/niko.png"));
 	body.setTextureRect({ 0,0,48,64 });
 	SetOrigin(Origins::BC);
 }
 
-void Neko::Update(float dt)
+void Niko::Update(float dt)
 {
 	animator.Update(dt);
 
@@ -165,11 +165,11 @@ void Neko::Update(float dt)
 		Utils::Normailize(direction);
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::LShift))
+	if (InputMgr::GetKey(sf::Keyboard::LShift))
 	{
-		speed = 300.f;
+		speed = 200.f;
 	}
-	if (InputMgr::GetKeyUp(sf::Keyboard::LShift))
+	else
 	{
 		speed = 100.f;
 	}
@@ -179,8 +179,13 @@ void Neko::Update(float dt)
 	debugBox.SetBounds(body.getGlobalBounds());
 }
 
-void Neko::Draw(sf::RenderWindow& window)
+void Niko::Draw(sf::RenderWindow& window)
 {
 	debugBox.Draw(window);
 	window.draw(body);
+}
+
+void Niko::SetDebugBoxOutlineColor(const sf::Color& color)
+{
+	debugBox.SetOutlineColor(color);
 }
