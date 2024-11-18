@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;.\Item;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;.\Item\map001\;.\Character;.\Item\map002;.\Item\map003;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;.\Item;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;.\Map;.\UI;.\guitar;.\Item\map001;.\Character;.\Item\map002;.\Item\map003;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,9 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Item\BookCase.cpp" />
-    <ClCompile Include="guitar\AnimationClip.cpp" />
-    <ClCompile Include="guitar\Animator.cpp" />
+    <ClCompile Include="Framework\TransfomableRect.cpp" />
+    <ClCompile Include="Item\map003\Door.cpp" />
+    <ClCompile Include="Item\map003\FirePlace.cpp" />
+    <ClCompile Include="Item\map001\BookCase.cpp" />
+    <ClCompile Include="Framework\AnimationClip.cpp" />
+    <ClCompile Include="Framework\Animator.cpp" />
     <ClCompile Include="guitar\AniPlayer.cpp" />
     <ClCompile Include="Framework\Button.cpp" />
     <ClCompile Include="Framework\DebugBox.cpp" />
@@ -157,27 +160,35 @@
     <ClCompile Include="Framework\stdafx.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Framework\Variables.cpp" />
-    <ClCompile Include="Item\Computer.cpp" />
+    <ClCompile Include="Item\map001\Computer.cpp" />
+    <ClCompile Include="Item\map003\LightDoor.cpp" />
+    <ClCompile Include="Map\Map003.cpp" />
     <ClCompile Include="Map\Map002.cpp" />
     <ClCompile Include="Map\Map001.cpp" />
     <ClCompile Include="guitar\Player.cpp" />
-    <ClCompile Include="guitar\SaveData.cpp" />
-    <ClCompile Include="guitar\SaveLoadMgr.cpp" />
+    <ClCompile Include="Framework\SaveData.cpp" />
+    <ClCompile Include="Framework\SaveLoadMgr.cpp" />
     <ClCompile Include="guitar\SceneGame.cpp" />
     <ClCompile Include="guitar\SceneTitle.cpp" />
-    <ClCompile Include="guitar\SpriteButton.cpp" />
+    <ClCompile Include="Framework\SpriteButton.cpp" />
     <ClCompile Include="guitar\TileMap.cpp" />
-    <ClCompile Include="guitar\Niko.cpp" />
-    <ClCompile Include="Item\Remocon.cpp" />
-    <ClCompile Include="Item\ObjectHitBox.cpp" />
+    <ClCompile Include="Character\Niko.cpp" />
+    <ClCompile Include="Item\map001\Remocon.cpp" />
+    <ClCompile Include="Item\map003\TV.cpp" />
+    <ClCompile Include="Item\map003\Sofa.cpp" />
+    <ClCompile Include="Item\map003\Refrigerator.cpp" />
+    <ClCompile Include="Item\map003\Sink.cpp" />
     <ClCompile Include="UI\Message.cpp" />
     <ClCompile Include="UI\UiHud.cpp" />
     <ClCompile Include="UI\UiUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Item\BookCase.h" />
-    <ClInclude Include="guitar\AnimationClip.h" />
-    <ClInclude Include="guitar\Animator.h" />
+    <ClInclude Include="Framework\TransfomableRect.h" />
+    <ClInclude Include="Item\map003\Door.h" />
+    <ClInclude Include="Item\map003\FirePlace.h" />
+    <ClInclude Include="Item\map001\BookCase.h" />
+    <ClInclude Include="Framework\AnimationClip.h" />
+    <ClInclude Include="Framework\Animator.h" />
     <ClInclude Include="guitar\AniPlayer.h" />
     <ClInclude Include="Framework\Button.h" />
     <ClInclude Include="Framework\DebugBox.h" />
@@ -198,19 +209,24 @@
     <ClInclude Include="Framework\stdafx.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Framework\Variables.h" />
-    <ClInclude Include="Item\Computer.h" />
+    <ClInclude Include="Item\map001\Computer.h" />
+    <ClInclude Include="Item\map003\LightDoor.h" />
+    <ClInclude Include="Map\Map003.h" />
     <ClInclude Include="Map\Map002.h" />
     <ClInclude Include="Map\Map001.h" />
     <ClInclude Include="guitar\Player.h" />
-    <ClInclude Include="guitar\SaveData.h" />
-    <ClInclude Include="guitar\SaveLoadMgr.h" />
+    <ClInclude Include="Framework\SaveData.h" />
+    <ClInclude Include="Framework\SaveLoadMgr.h" />
     <ClInclude Include="guitar\SceneGame.h" />
     <ClInclude Include="guitar\SceneTitle.h" />
-    <ClInclude Include="guitar\SpriteButton.h" />
+    <ClInclude Include="Framework\SpriteButton.h" />
     <ClInclude Include="guitar\TileMap.h" />
-    <ClInclude Include="guitar\Niko.h" />
-    <ClInclude Include="Item\Remocon.h" />
-    <ClInclude Include="Item\ObjectHitBox.h" />
+    <ClInclude Include="Character\Niko.h" />
+    <ClInclude Include="Item\map001\Remocon.h" />
+    <ClInclude Include="Item\map003\TV.h" />
+    <ClInclude Include="Item\map003\Sofa.h" />
+    <ClInclude Include="Item\map003\Refrigerator.h" />
+    <ClInclude Include="Item\map003\Sink.h" />
     <ClInclude Include="UI\Message.h" />
     <ClInclude Include="UI\UiHud.h" />
     <ClInclude Include="UI\UiUpgrade.h" />

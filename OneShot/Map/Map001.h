@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
+#include "Scene.h"
 
-class SpriteGo;
 class Niko;
 class Remocon;
 class Computer;
@@ -9,6 +9,7 @@ class BookCase;
 class ObjectHitBox;
 class HitBox;
 class Message;
+class TransfomableRect;
 
 class Map001 : public Scene
 {
@@ -25,10 +26,8 @@ protected:
 	DebugBox debugBox;
 
 	static sf::RectangleShape nikoRect;
-	static sf::RectangleShape remoconRect;
 	static sf::RectangleShape rect1;
 	static sf::RectangleShape rect2;
-	static sf::RectangleShape computerRect;
 
 	bool getRemocon = false;
 	bool isCollision = false;

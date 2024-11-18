@@ -27,9 +27,6 @@ protected:
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f nikoPosition;
 
-	DebugBox debugBox;
-	HitBox hitbox;
-
 public:
 	Niko(const std::string& name = "");
 	~Niko() = default;
@@ -53,8 +50,6 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-
-	void SetDebugBoxOutlineColor(const sf::Color& color);
 
 };
 

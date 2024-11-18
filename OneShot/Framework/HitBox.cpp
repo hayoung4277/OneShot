@@ -16,6 +16,9 @@ void HitBox::UpdateTr(const sf::Transformable& tr, const sf::FloatRect& localBou
 	rect.setPosition(tr.getPosition());
 	rect.setScale(tr.getScale());
 	rect.setRotation(tr.getRotation());
+	rect.setFillColor(sf::Color::Transparent);
+	rect.setOutlineColor(sf::Color::Red);
+	rect.setOutlineThickness(1);
 }
 
 void HitBox::Draw(sf::RenderWindow& window)

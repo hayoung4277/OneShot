@@ -166,7 +166,7 @@ void Niko::Reset()
 {
 	body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/niko.png"));
 	body.setTextureRect({ 0,0,48,64 });
-	SetOrigin(Origins::BC);
+	SetOrigin(Origins::TL);
 }
 
 void Niko::Update(float dt)
@@ -192,16 +192,18 @@ void Niko::Update(float dt)
 		speed = 100.f;
 	}
 
-	debugBox.SetBounds(body.getGlobalBounds());
+	sf::FloatRect nikoFloatRect = body.getGlobalBounds();
+
+	sf::Transformable a;
+	a.setPosition(body.getPosition().x + 24, body.getPosition().y + 36);
+
+	hitbox.UpdateTr(a, {nikoFloatRect.left, nikoFloatRect.top,
+		                    nikoFloatRect.width * 0.5f,
+		                    nikoFloatRect.height * 0.5f });
 }
 
 void Niko::Draw(sf::RenderWindow& window)
 {
-	//debugBox.Draw(window);
+	hitbox.Draw(window);
 	window.draw(body);
-}
-
-void Niko::SetDebugBoxOutlineColor(const sf::Color& color)
-{
-	debugBox.SetOutlineColor(color);
 }

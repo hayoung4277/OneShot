@@ -1,10 +1,13 @@
 #include "Map002.h"
 #include "Niko.h"
-#include "ObjectHitBox.h"
 #include "Message.h"
 
 sf::RectangleShape Map002::nikoRect(sf::Vector2f(48.f, 64.f));
 sf::RectangleShape Map002::flowerRect(sf::Vector2f({ 32.f, 26.f }));
+sf::RectangleShape Map002::sinkRect(sf::Vector2f({ 32.f, 43.f }));
+sf::RectangleShape Map002::toiletRect(sf::Vector2f({ 29.f, 53.f }));
+sf::RectangleShape Map002::bathRect(sf::Vector2f({ 64.f, 34.f }));
+sf::RectangleShape Map002::rect(sf::Vector2f(16.f, 32.f));
 
 Map002::Map002()
 	:Scene(SceneIds::Map002)
@@ -15,7 +18,6 @@ void Map002::Init()
 {
 	map002 = AddGo(new SpriteGo("Graphics/Map/map002.png"));
 	niko = AddGo(new Niko("Niko"));
-	hitbox = AddGo(new ObjectHitBox("HitBox"));
 	text = AddGo(new Message("Text"));
 
 	Scene::Init();
@@ -40,13 +42,25 @@ void Map002::Init()
 	nikoRect.setOutlineColor(sf::Color::Green);
 	nikoRect.setOutlineThickness(1);
 
-	hitbox->SetOrigin(Origins::BC);
-	hitbox->SetScale({ 1.f, 1.f });
-	hitbox->SetPosition({ 610.f, 580.f });
+	Utils::SetOrigin(rect, Origins::MC);
+	rect.setPosition({ 730.f, 710.f });
+	rect.setScale({ 1.5f, 1.5f });
 
 	Utils::SetOrigin(flowerRect, Origins::BC);
-	flowerRect.setPosition(hitbox->GetPosition());
+	flowerRect.setPosition({ 610.f, 580.f });
 	flowerRect.setScale({ 1.f, 1.f });
+
+	Utils::SetOrigin(sinkRect, Origins::BC);
+	sinkRect.setPosition({ 475.f, 515.f });
+	sinkRect.setScale({2.f, 2.f});
+
+	Utils::SetOrigin(toiletRect, Origins::BC);
+	toiletRect.setPosition({ 365.f, 535.f });
+	toiletRect.setScale({ 2.f, 2.f });
+
+	Utils::SetOrigin(bathRect, Origins::BC);
+	bathRect.setPosition({ 355.f, 750.f });
+	bathRect.setScale({ 2.f, 2.f });
 
 	text->SetActive(false);
 
@@ -55,6 +69,11 @@ void Map002::Init()
 
 void Map002::Enter()
 {
+	sf::Vector2f nikopos = niko->GetPosition();
+
+	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setCenter(nikopos.x, nikopos.y);
+
 	TEXTURE_MGR.Load("Graphics/Map/map002.png");
 
 	Scene::Enter();
@@ -73,11 +92,34 @@ void Map002::Update(float dt)
 
 	sf::Vector2f pos = niko->GetPosition();
 
+	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setCenter(pos.x, pos.y);
+
 	nikoRect.setPosition(pos);
 
 	if (Utils::CheckCollision(nikoRect, flowerRect))
 	{
 		niko->SetSpeed(0.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, sinkRect))
+	{
+		niko->SetSpeed(0.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, toiletRect))
+	{
+		niko->SetSpeed(0.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, bathRect))
+	{
+		niko->SetSpeed(0.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, rect))
+	{
+		SCENE_MGR.ChangeScene(SceneIds::Map001);
 	}
 
 	if (Utils::CheckCollision(nikoRect, flowerRect) && InputMgr::GetKey(sf::Keyboard::Z))
@@ -97,6 +139,23 @@ void Map002::Update(float dt)
 	}
 
 	if (Utils::CheckCollision(nikoRect, flowerRect) && InputMgr::GetKey(sf::Keyboard::Left))
+	{
+		niko->SetSpeed(100.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, sinkRect) && InputMgr::GetKey(sf::Keyboard::Down))
+	{
+		niko->SetSpeed(100.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, toiletRect) && InputMgr::GetKey(sf::Keyboard::Down)
+		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
+	{
+		niko->SetSpeed(100.f);
+	}
+
+	if (Utils::CheckCollision(nikoRect, bathRect) && InputMgr::GetKey(sf::Keyboard::Up)
+		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
 	{
 		niko->SetSpeed(100.f);
 	}

@@ -20,6 +20,10 @@ protected:
 
 	static sf::RectangleShape nikoRect;
 	static sf::RectangleShape flowerRect;
+	static sf::RectangleShape sinkRect;
+	static sf::RectangleShape toiletRect;
+	static sf::RectangleShape bathRect;
+	static sf::RectangleShape rect;
 
 	sf::Vector2f mapScale = { 2.f, 2.f };
 

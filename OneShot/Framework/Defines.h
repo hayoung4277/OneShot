@@ -14,6 +14,7 @@ enum class SceneIds
 	Title,
 	Map001,
 	Map002,
+	Map003,
 	Game,
 	Count,
 };
