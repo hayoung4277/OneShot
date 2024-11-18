@@ -2,22 +2,11 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-class Remocon : public GameObject
+class BookCase : public GameObject
 {
-public:
-	struct ClipInfo
-	{
-		std::string idle;
-		std::string move;
-	};
-
 protected:
 	sf::Sprite body;
 	Animator animator;
-
-	std::map<std::string, AnimationClip> temp;
-	std::vector<ClipInfo> clipInfos;
-	int cuurentClipIndex;
 
 	sf::Vector2f pos;
 
@@ -25,8 +14,8 @@ protected:
 	HitBox hitbox;
 
 public:
-	Remocon(const std::string& name = "");
-	~Remocon() = default;
+	BookCase(const std::string& name = "");
+	~BookCase() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -47,6 +36,5 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SetDebugBoxOutlineColor(const sf::Color& color);
-
 };
 

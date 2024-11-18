@@ -2,43 +2,34 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-class Remocon : public GameObject
+class ObjectHitBox : public GameObject
 {
-public:
-	struct ClipInfo
-	{
-		std::string idle;
-		std::string move;
-	};
-
 protected:
-	sf::Sprite body;
-	Animator animator;
+	sf::Sprite square;
 
-	std::map<std::string, AnimationClip> temp;
-	std::vector<ClipInfo> clipInfos;
-	int cuurentClipIndex;
+	sf::Vector2f size;
 
+	static sf::RectangleShape rect;
 	sf::Vector2f pos;
 
 	DebugBox debugBox;
-	HitBox hitbox;
 
 public:
-	Remocon(const std::string& name = "");
-	~Remocon() = default;
+	ObjectHitBox(const std::string& name = "");
+	~ObjectHitBox() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
 	void SetScale(const sf::Vector2f& scale) override;
 
+	sf::FloatRect GetLocalBounds() const override;
+	sf::FloatRect GetGlobalBounds() const override;
+
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
-	sf::Sprite GetSprite() { return body; }
+	sf::RectangleShape GetRectangleShape() { return rect; }
 	sf::Vector2f GetPosition();
-	sf::FloatRect GetLocalBounds() const override;
-	sf::FloatRect GetGlobalBounds() const override;
 
 	void Init() override;
 	void Release() override;
@@ -47,6 +38,5 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	void SetDebugBoxOutlineColor(const sf::Color& color);
-
 };
 

@@ -25,8 +25,10 @@ protected:
 	int currentClipIndex;
 
 	sf::Vector2f velocity = { 0.f, 0.f };
+	sf::Vector2f nikoPosition;
 
 	DebugBox debugBox;
+	HitBox hitbox;
 
 public:
 	Niko(const std::string& name = "");
@@ -37,12 +39,14 @@ public:
 	void SetScale(const sf::Vector2f& scale) override;
 
 	sf::Sprite GetSprite() { return body; }
+	sf::FloatRect GetLocalBounds() const override;
+	sf::FloatRect GetGlobalBounds() const override;
 
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
 	void SetSpeed(float speed);
-	float GetSpeed() { return speed; }
+	sf::Vector2f GetPosition();
 
 	void Init() override;
 	void Release() override;

@@ -38,6 +38,12 @@ void Computer::SetOrigin(const sf::Vector2f& newOrigin)
 	origin = Utils::SetOrigin(body, originPreset);
 }
 
+sf::Vector2f Computer::GetPositoin()
+{
+	pos = body.getPosition();
+	return pos;
+}
+
 void Computer::Init()
 {
 	std::string textureId = "Graphics/Characters/computer.png";

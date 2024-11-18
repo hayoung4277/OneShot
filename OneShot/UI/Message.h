@@ -2,27 +2,17 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-class Computer : public GameObject
+class Message : public GameObject
 {
-public:
-	struct ClipInfo
-	{
-	std::string idle;
-	std::string move;
-	};
-
 protected:
-	sf::Sprite body;
-	Animator animator;
 
-	sf::Vector2f pos;
+	sf::Text message;
 
-	DebugBox debugBox;
-	HitBox hitbox;
+	sf::Vector2f pos = FRAMEWORK.GetWindowSizeF() * 0.5f;
 
 public:
-	Computer(const std::string& name = "");
-	~Computer() = default;
+	Message(const std::string& name = "");
+	~Message() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -30,15 +20,13 @@ public:
 
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
-
-	sf::Sprite GetSprite() { return body; }
-	sf::Vector2f GetPositoin();
+	void SetString(const sf::String& str);
+	void SetStringSize(int size);
 
 	void Init() override;
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-
 };
 

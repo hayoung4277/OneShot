@@ -1,4 +1,5 @@
 #include "Remocon.h"
+#include "Niko.h"
 
 Remocon::Remocon(const std::string& name)
 	:GameObject(name)
@@ -36,6 +37,22 @@ void Remocon::SetOrigin(const sf::Vector2f& newOrigin)
 {
 	originPreset = Origins::Custom;
 	origin = Utils::SetOrigin(body, originPreset);
+}
+
+sf::Vector2f Remocon::GetPosition()
+{
+	pos = body.getPosition();
+	return pos;
+}
+
+sf::FloatRect Remocon::GetLocalBounds() const
+{
+	return body.getLocalBounds();
+}
+
+sf::FloatRect Remocon::GetGlobalBounds() const
+{
+	return body.getGlobalBounds();
 }
 
 void Remocon::Init()

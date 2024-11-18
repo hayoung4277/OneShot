@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Item\BookCase.cpp" />
     <ClCompile Include="guitar\AnimationClip.cpp" />
     <ClCompile Include="guitar\Animator.cpp" />
     <ClCompile Include="guitar\AniPlayer.cpp" />
@@ -168,10 +169,13 @@
     <ClCompile Include="guitar\TileMap.cpp" />
     <ClCompile Include="guitar\Niko.cpp" />
     <ClCompile Include="Item\Remocon.cpp" />
+    <ClCompile Include="Item\ObjectHitBox.cpp" />
+    <ClCompile Include="UI\Message.cpp" />
     <ClCompile Include="UI\UiHud.cpp" />
     <ClCompile Include="UI\UiUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Item\BookCase.h" />
     <ClInclude Include="guitar\AnimationClip.h" />
     <ClInclude Include="guitar\Animator.h" />
     <ClInclude Include="guitar\AniPlayer.h" />
@@ -206,6 +210,8 @@
     <ClInclude Include="guitar\TileMap.h" />
     <ClInclude Include="guitar\Niko.h" />
     <ClInclude Include="Item\Remocon.h" />
+    <ClInclude Include="Item\ObjectHitBox.h" />
+    <ClInclude Include="UI\Message.h" />
     <ClInclude Include="UI\UiHud.h" />
     <ClInclude Include="UI\UiUpgrade.h" />
   </ItemGroup>

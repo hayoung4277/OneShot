@@ -24,6 +24,16 @@ void Niko::SetScale(const sf::Vector2f& s)
 	body.setScale(scale);
 }
 
+sf::FloatRect Niko::GetLocalBounds() const
+{
+	return body.getLocalBounds();
+}
+
+sf::FloatRect Niko::GetGlobalBounds() const
+{
+	return body.getGlobalBounds();
+}
+
 void Niko::SetOrigin(Origins preset)
 {
 	originPreset = preset;
@@ -42,6 +52,12 @@ void Niko::SetOrigin(const sf::Vector2f& newOrigin)
 void Niko::SetSpeed(float speed)
 {
 	this->speed = speed;
+}
+
+sf::Vector2f Niko::GetPosition()
+{
+	nikoPosition = body.getPosition();
+	return nikoPosition;
 }
 
 void Niko::Init()
@@ -165,6 +181,8 @@ void Niko::Update(float dt)
 		Utils::Normailize(direction);
 	}
 
+	SetPosition(position + direction * speed * dt);
+
 	if (InputMgr::GetKey(sf::Keyboard::LShift))
 	{
 		speed = 200.f;
@@ -174,14 +192,12 @@ void Niko::Update(float dt)
 		speed = 100.f;
 	}
 
-	SetPosition(position + direction * speed * dt);
-
 	debugBox.SetBounds(body.getGlobalBounds());
 }
 
 void Niko::Draw(sf::RenderWindow& window)
 {
-	debugBox.Draw(window);
+	//debugBox.Draw(window);
 	window.draw(body);
 }
 

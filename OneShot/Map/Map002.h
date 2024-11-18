@@ -3,6 +3,8 @@
 #include "Scene.h"
 
 class Niko;
+class ObjectHitBox;
+class Message;
 
 class Map002 : public Scene
 {
@@ -10,12 +12,14 @@ protected:
 	SpriteGo* map002;
 	Animator animator;
 	Niko* niko;
-
-	float collisionDelay = 5.f;
-
-	bool getRemocon = false;
+	ObjectHitBox* hitbox;
+	Message* text;
 
 	bool isCollision = false;
+	bool getBranch = false;
+
+	static sf::RectangleShape nikoRect;
+	static sf::RectangleShape flowerRect;
 
 	sf::Vector2f mapScale = { 2.f, 2.f };
 
