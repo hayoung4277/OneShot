@@ -63,11 +63,13 @@ void Computer::Update(float dt)
 {
 	animator.Update(dt);
 
-	debugBox.SetBounds(body.getGlobalBounds());
+	sf::FloatRect computerFloatRect = body.getLocalBounds();
+
+	hitbox.UpdateTr(body, computerFloatRect);
 }
 
 void Computer::Draw(sf::RenderWindow& window)
 {
-	debugBox.Draw(window);
+	hitbox.Draw(window);
 	window.draw(body);
 }

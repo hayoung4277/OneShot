@@ -71,16 +71,13 @@ void BookCase::Reset()
 
 void BookCase::Update(float dt)
 {
-    debugBox.SetBounds(body.getGlobalBounds());
+    sf::FloatRect bookcaseFloatRect = body.getLocalBounds();
+
+    hitbox.UpdateTr(body, bookcaseFloatRect);
 }
 
 void BookCase::Draw(sf::RenderWindow& window)
 {
-    debugBox.Draw(window);
+    hitbox.Draw(window);
     window.draw(body);
-}
-
-void BookCase::SetDebugBoxOutlineColor(const sf::Color& color)
-{
-    debugBox.SetOutlineColor(color);
 }

@@ -21,6 +21,7 @@ public:
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 	void SetString(const sf::String& str);
+	/*void SetString(int s);*/
 	void SetStringSize(int size);
 
 	void Init() override;

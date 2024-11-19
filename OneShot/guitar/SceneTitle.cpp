@@ -20,7 +20,7 @@ void SceneTitle::Init()
 	Scene::Init();
 
 	background->sortingLayer = SortingLayers::Background;
-	background->sortingOrder = -1;
+	background->sortingOrder = -2;
 	background->SetOrigin(Origins::TL);
 	background->SetScale(titleScale);
 	background->SetPosition({ 0, 0 });
@@ -37,11 +37,7 @@ void SceneTitle::Init()
 	startBtn->SetPosition({ 640.f + 200.f, 480.f + 380.f });
 	startBtn->SetFontSize(50);
 	startBtn->SetOrigin(Origins::MC);
-	startBtn->SetText("START");
-	startBtn->SetRectOutlineColor(sf::Color::White);
-	startBtn->SetRectFillColor(sf::Color::Transparent);
-	startBtn->SetRectOutlineThickness(5);
-	startBtn->SetRectSize({ 150.f, 100.f });
+	startBtn->SetText(std::to_string(s));
 
 	quitBtn->sortingLayer = SortingLayers::UI;
 	quitBtn->sortingOrder = 1;
@@ -50,6 +46,15 @@ void SceneTitle::Init()
 	quitBtn->SetOrigin(Origins::ML);
 	quitBtn->SetText("QUIT");
 
+	for (int i = 0; i < 2; ++i)
+	{
+		rect[i].setFillColor(sf::Color::Transparent);
+		rect[i].setOutlineColor(sf::Color::White);
+		rect[i].setOutlineThickness(5);
+		Utils::SetOrigin(rect[i], Origins::MC);
+		rect[i].setPosition({ btnPos.x, btnPos.y });
+		btnPos.y += 90.f;
+	}
 }
 
 void SceneTitle::Enter()
@@ -75,12 +80,6 @@ void SceneTitle::Exit()
 void SceneTitle::Update(float dt)
 {
 	Scene::Update(dt);
-	//TitleMove(dt);
-
-	//if (InputMgr::GetKeyDown(sf::Keyboard::Space))
-	//{
-	//	SCENE_MGR.ChangeScene(SceneIds::Dev1);
-	//}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
@@ -92,6 +91,12 @@ void SceneTitle::Update(float dt)
 		SCENE_MGR.ChangeScene(SceneIds::Map001);
 	}
 
+	HitBox& startBtnHitBox = startBtn->GetHitBox();
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+	{
+		s++;
+	}
 
 	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left)) {
 		if (startBtn->IsCursorOn()) {
@@ -120,18 +125,4 @@ void SceneTitle::Update(float dt)
 void SceneTitle::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-}
-
-void SceneTitle::TitleMove(float dt)
-{
-	if (titleScale.x > 0.52f) {
-		scaleMultiply = -0.02f;
-	}
-	else if (titleScale.x < 0.5) {
-		scaleMultiply = 0.02f;
-	}
-	titleScale.x += scaleMultiply * dt;
-	titleScale.y += scaleMultiply * dt;
-
-	background->SetScale(titleScale);
 }

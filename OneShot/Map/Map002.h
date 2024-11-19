@@ -25,6 +25,8 @@ protected:
 	static sf::RectangleShape bathRect;
 	static sf::RectangleShape rect;
 
+	sf::RectangleShape doorRect;
+
 	sf::Vector2f mapScale = { 2.f, 2.f };
 
 public:

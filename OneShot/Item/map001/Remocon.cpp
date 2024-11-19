@@ -103,16 +103,13 @@ void Remocon::Update(float dt)
 {
 	animator.Update(dt);
 
-	debugBox.SetBounds(body.getGlobalBounds());
+	sf::FloatRect remoconFloatRect = body.getLocalBounds();
+
+	hitbox.UpdateTr(body, remoconFloatRect);
 }
 
 void Remocon::Draw(sf::RenderWindow& window)
 {
-	debugBox.Draw(window);
+	hitbox.Draw(window);
 	window.draw(body);
-}
-
-void Remocon::SetDebugBoxOutlineColor(const sf::Color& color)
-{
-	debugBox.SetOutlineColor(color);
 }

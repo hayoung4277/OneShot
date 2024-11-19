@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Framework\TransfomableRect.cpp" />
     <ClCompile Include="Item\map003\Door.cpp" />
     <ClCompile Include="Item\map003\FirePlace.cpp" />
     <ClCompile Include="Item\map001\BookCase.cpp" />
@@ -183,7 +182,6 @@
     <ClCompile Include="UI\UiUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Framework\TransfomableRect.h" />
     <ClInclude Include="Item\map003\Door.h" />
     <ClInclude Include="Item\map003\FirePlace.h" />
     <ClInclude Include="Item\map001\BookCase.h" />

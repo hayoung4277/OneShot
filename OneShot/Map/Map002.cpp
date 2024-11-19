@@ -62,6 +62,11 @@ void Map002::Init()
 	bathRect.setPosition({ 355.f, 750.f });
 	bathRect.setScale({ 2.f, 2.f });
 
+	doorRect.setSize({ 16.f, 32.f });
+	Utils::SetOrigin(doorRect, Origins::MC);
+	doorRect.setScale({ 1.5f, 1.5f });
+	doorRect.setPosition({720.f, 700.f});
+
 	text->SetActive(false);
 
 	getBranch = false;
@@ -71,8 +76,8 @@ void Map002::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	worldView.setCenter(nikopos.x, nikopos.y);
+	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	//worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map002.png");
 
@@ -92,8 +97,14 @@ void Map002::Update(float dt)
 
 	sf::Vector2f pos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	worldView.setCenter(pos.x, pos.y);
+	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	//worldView.setCenter(pos.x, pos.y);
+
+	sf::FloatRect doorRectHitBox = doorRect.getLocalBounds();
+
+	HitBox& nikoHitBox = niko->GetHitBox();
+	HitBox doorHitBox;
+	doorHitBox.UpdateTr(doorRect, doorRectHitBox);
 
 	nikoRect.setPosition(pos);
 
@@ -159,9 +170,15 @@ void Map002::Update(float dt)
 	{
 		niko->SetSpeed(100.f);
 	}
+
+	if (Utils::CheckCollision(nikoHitBox, doorHitBox))
+	{
+		SCENE_MGR.ChangeScene(SceneIds::Map001);
+	}
 }
 
 void Map002::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+	window.draw(doorRect);
 }

@@ -17,9 +17,6 @@ protected:
 
 	sf::Vector2f pos;
 
-	DebugBox debugBox;
-	HitBox hitbox;
-
 public:
 	Computer(const std::string& name = "");
 	~Computer() = default;

@@ -21,9 +21,6 @@ protected:
 
 	sf::Vector2f pos;
 
-	DebugBox debugBox;
-	HitBox hitbox;
-
 public:
 	Remocon(const std::string& name = "");
 	~Remocon() = default;
@@ -45,8 +42,5 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-
-	void SetDebugBoxOutlineColor(const sf::Color& color);
-
 };
 

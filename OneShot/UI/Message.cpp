@@ -44,6 +44,11 @@ void Message::SetString(const sf::String& str)
 	message.setString(str);
 }
 
+//void Message::SetString(int s)
+//{
+//	message.setString(std::to_string(s));
+//}
+
 void Message::SetStringSize(int size)
 {
 	message.setCharacterSize(size);

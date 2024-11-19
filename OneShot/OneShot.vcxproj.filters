@@ -138,9 +138,6 @@
     <ClCompile Include="Item\map003\LightDoor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\TransfomableRect.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Button.h">
@@ -279,9 +276,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Item\map003\LightDoor.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\TransfomableRect.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

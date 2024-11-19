@@ -16,6 +16,12 @@ protected:
 	Button* quitBtn;
 	bool startBtnPressed;
 	bool quitBtnPressed;
+
+	int s = 0;
+
+	sf::Vector2f btnPos = { 640.f + 200.f, 480.f + 380.f };
+
+	sf::RectangleShape rect[2];
 public:
 	SceneTitle();
 	~SceneTitle() = default;
@@ -26,7 +32,5 @@ public:
 
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-
-	void TitleMove(float dt);
 };
 
