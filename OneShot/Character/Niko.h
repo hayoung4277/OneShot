@@ -27,6 +27,9 @@ protected:
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f nikoPosition;
 
+	std::list<GameObject*> getItems;
+	std::list<GameObject*> useItems;
+
 public:
 	Niko(const std::string& name = "");
 	~Niko() = default;
@@ -44,6 +47,9 @@ public:
 
 	void SetSpeed(float speed);
 	sf::Vector2f GetPosition();
+
+	const std::list<GameObject*>& GetItemList() const { return getItems; }
+	const std::list<GameObject*>& UseItemList() const { return useItems; }
 
 	void Init() override;
 	void Release() override;

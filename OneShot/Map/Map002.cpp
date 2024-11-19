@@ -34,7 +34,7 @@ void Map002::Init()
 
 	niko->SetOrigin(Origins::BC);
 	niko->SetScale({ 1.5f, 1.5f });
-	niko->SetPosition({ 680.f, 710.f });
+	niko->SetPosition({ 600.f, 620.f });
 
 	Utils::SetOrigin(nikoRect, Origins::BC);
 	nikoRect.setPosition(niko->GetPosition());
@@ -76,8 +76,8 @@ void Map002::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	//worldView.setCenter(nikopos.x, nikopos.y);
+	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map002.png");
 
@@ -97,8 +97,8 @@ void Map002::Update(float dt)
 
 	sf::Vector2f pos = niko->GetPosition();
 
-	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	//worldView.setCenter(pos.x, pos.y);
+	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setCenter(pos.x, pos.y);
 
 	sf::FloatRect doorRectHitBox = doorRect.getLocalBounds();
 

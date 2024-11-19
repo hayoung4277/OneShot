@@ -2,17 +2,16 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-class Message : public GameObject
+class Inventory : public GameObject
 {
 protected:
+	sf::Sprite body;
 
-	sf::Text message;
-
-	sf::Vector2f pos = FRAMEWORK.GetWindowSizeF() * 0.5f;
+	sf::Vector2f pos;
 
 public:
-	Message(const std::string& name = "");
-	~Message() = default;
+	Inventory(const std::string& name = "");
+	~Inventory() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -20,13 +19,19 @@ public:
 
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
-	void SetString(const sf::String& str);
-	void SetStringSize(int size);
+
+	sf::Sprite GetSprite() { return body; }
+	sf::Vector2f GetPosition();
+	sf::FloatRect GetLocalBounds() const override;
+	sf::FloatRect GetGlobalBounds() const override;
 
 	void Init() override;
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void GetItem();
+	void UseItem();
 };
 

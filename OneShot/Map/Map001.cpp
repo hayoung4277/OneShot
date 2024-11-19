@@ -8,6 +8,7 @@
 #include "Message.h"
 #include "HitBox.h"
 #include "Button.h"
+#include "Inventory.h"
 
 Map001::Map001()
 	:Scene(SceneIds::Map001)
@@ -22,6 +23,7 @@ void Map001::Init()
 	computer = AddGo(new Computer("Computer"));
 	bookcase = AddGo(new BookCase("BookCase"));
 	text = AddGo(new Message("Message"));
+	inventory = AddGo(new Inventory("Inventory"));
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -98,6 +100,13 @@ void Map001::Init()
 	text->SetActive(false);
 	text->SetPosition({ 600.f, 700.f });
 	text->SetStringSize(10);
+
+	inventory->sortingLayer = SortingLayers::UI;
+	inventory->sortingOrder = 1;
+
+	inventory->SetOrigin(Origins::MC);
+	inventory->SetPosition({1240 * 0.5f, 960 * 0.5f});
+	inventory->SetActive(false);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -201,7 +210,7 @@ void Map001::Update(float dt)
 
 	if (getRemocon == true)
 	{
-		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
+		if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 		{
 			text->SetActive(false);
 		}
@@ -273,7 +282,7 @@ void Map001::Update(float dt)
 
 			password[selectIndex]->SetText(std::to_string(s));
 
-			if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+			if (s == 5 && InputMgr::GetKeyDown(sf::Keyboard::Enter))
 			{
 				for (int i = 0; i < 4; i++)
 				{
@@ -283,6 +292,19 @@ void Map001::Update(float dt)
 				text->SetStringSize(50);
 				text->SetActive(true);
 				solvePassword = true;
+				passwordIsActive = false;
+				niko->SetPosition({ nikoPos.x, nikoPos.y + 1 });
+			}
+			else if(InputMgr::GetKeyDown(sf::Keyboard::Enter))
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					password[i]->SetActive(false);
+				}
+				text->SetString("Wrong!");
+				text->SetStringSize(50);
+				text->SetActive(true);
+				solvePassword = false;
 				passwordIsActive = false;
 				niko->SetPosition({ nikoPos.x, nikoPos.y + 1 });
 			}
@@ -307,7 +329,7 @@ void Map001::Update(float dt)
 		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
 			text->SetActive(false);
-			niko->SetPosition({ nikoPos.x + 1, nikoPos.y });
+			niko->SetPosition({ nikoPos.x, nikoPos.y - 1 });
 			niko->SetSpeed(100.f);
 		}
 	}
@@ -326,15 +348,15 @@ void Map001::Update(float dt)
 		text->SetPosition({ 600.f, 500.f });
 		text->SetActive(true);
 
-		if (InputMgr::GetKey(sf::Keyboard::Right));
+		if (InputMgr::GetKey(sf::Keyboard::Z));
 		{
 			text->SetActive(false);
 			niko->SetSpeed(100.f);
-			niko->SetPosition({ nikoPos.x, nikoPos.y - 1 });
+			niko->SetPosition({ nikoPos.x + 1, nikoPos.y });
 		}
 	}
 
-	if (solvePassword == true && Utils::CheckCollision(nikoHitBox, toiletDoorHitBox))
+	if (solvePassword == true && Utils::CheckCollision(nikoHitBox, livingroom))
 	{
 		SCENE_MGR.ChangeScene(SceneIds::Map003);
 	}

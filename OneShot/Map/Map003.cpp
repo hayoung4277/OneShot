@@ -38,7 +38,7 @@ void Map003::Init()
 	niko->sortingLayer = SortingLayers::Foreground;
 	niko->sortingOrder = 2;
 
-	niko->SetPosition({ 300.f, 300.f });
+	niko->SetPosition({ 200.f, 200.f });
 	niko->SetScale({ 1.5f, 1.5f });
 	niko->SetOrigin(Origins::TL);
 
@@ -192,7 +192,7 @@ void Map003::Update(float dt)
 		}
 	}
 
-	if (Utils::CheckCollision(nikoHitbox, lightdoorHitBox))
+	if (Utils::CheckCollision(nikoHitbox, doorHitBox))
 	{
 		SCENE_MGR.ChangeScene(SceneIds::Map001);
 	}

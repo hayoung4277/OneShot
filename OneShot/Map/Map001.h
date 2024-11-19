@@ -10,6 +10,7 @@ class ObjectHitBox;
 class HitBox;
 class Message;
 class Button;
+class Inventory;
 
 class Map001 : public Scene
 {
@@ -21,6 +22,7 @@ protected:
 	Computer* computer;
 	BookCase* bookcase;
 	Message* text;
+	Inventory* inventory;
 
 	Button* password[4];
 	sf::Vector2f passwordPos = {100.f, 100.f};

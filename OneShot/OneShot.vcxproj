@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UI\Inventory.cpp" />
     <ClCompile Include="Item\map003\Door.cpp" />
     <ClCompile Include="Item\map003\FirePlace.cpp" />
     <ClCompile Include="Item\map001\BookCase.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="UI\UiUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI\Inventory.h" />
     <ClInclude Include="Item\map003\Door.h" />
     <ClInclude Include="Item\map003\FirePlace.h" />
     <ClInclude Include="Item\map001\BookCase.h" />
