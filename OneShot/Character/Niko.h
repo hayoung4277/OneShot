@@ -17,6 +17,10 @@ protected:
 	sf::Sprite body;
 	Animator animator;
 
+	int beforeScene = 1;
+
+	std::string textureId = "Graphics/Characters/niko.png";
+
 	sf::Vector2f direction;
 	float speed = 100.f;
 
@@ -27,8 +31,10 @@ protected:
 	sf::Vector2f velocity = { 0.f, 0.f };
 	sf::Vector2f nikoPosition;
 
-	std::list<GameObject*> getItems;
-	std::list<GameObject*> useItems;
+	bool getBranch = false;
+
+	//std::list<GameObject*> getItems;
+	//std::list<GameObject*> useItems;
 
 public:
 	Niko(const std::string& name = "");
@@ -48,8 +54,16 @@ public:
 	void SetSpeed(float speed);
 	sf::Vector2f GetPosition();
 
-	const std::list<GameObject*>& GetItemList() const { return getItems; }
-	const std::list<GameObject*>& UseItemList() const { return useItems; }
+	void SetTexutreID(const std::string& id);
+
+	void SetBranchGet();
+	bool IsGetBranch() { return getBranch; }
+
+	void SetBeforeScene(int current);
+	int GetBeforeScene() { return beforeScene; }
+
+	//const std::list<GameObject*>& GetItemList() const { return getItems; }
+	//const std::list<GameObject*>& UseItemList() const { return useItems; }
 
 	void Init() override;
 	void Release() override;

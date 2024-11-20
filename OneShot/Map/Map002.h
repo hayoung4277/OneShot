@@ -5,6 +5,10 @@
 class Niko;
 class ObjectHitBox;
 class Message;
+class Bath;
+class DryFlower;
+class Toilet;
+class ToiletSink;
 
 class Map002 : public Scene
 {
@@ -12,18 +16,14 @@ protected:
 	SpriteGo* map002;
 	Animator animator;
 	Niko* niko;
-	ObjectHitBox* hitbox;
 	Message* text;
+	Bath* bath;
+	DryFlower* dryflower;
+	Toilet* toilet;
+	ToiletSink* sink;
 
 	bool isCollision = false;
 	bool getBranch = false;
-
-	static sf::RectangleShape nikoRect;
-	static sf::RectangleShape flowerRect;
-	static sf::RectangleShape sinkRect;
-	static sf::RectangleShape toiletRect;
-	static sf::RectangleShape bathRect;
-	static sf::RectangleShape rect;
 
 	sf::RectangleShape doorRect;
 

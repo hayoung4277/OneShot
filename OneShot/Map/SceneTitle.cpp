@@ -125,4 +125,8 @@ void SceneTitle::Update(float dt)
 void SceneTitle::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+	for (int i = 0; i < 2; i++)
+	{
+		window.draw(rect[i]);
+	}
 }

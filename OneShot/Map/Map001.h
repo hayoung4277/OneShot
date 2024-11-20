@@ -30,11 +30,14 @@ protected:
 	sf::RectangleShape rect[5];
 	sf::RectangleShape passwordRect[4];
 
+	sf::RectangleShape windowRect;
+
 	bool getRemocon = false;
 	bool isCollision = false;
 	bool solvePassword = false;
 	bool passwordIsActive = false;
-	bool a = false;
+	bool getBranch = false;
+	bool isPasswordVisible = false;
 
 	int s = 0;
 	int selectIndex = 0;

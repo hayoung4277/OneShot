@@ -81,31 +81,37 @@ void Map001::Init()
 	rect[0].setPosition({ 20.f, 540.f });
 
 	rect[1].setSize({ 32.f, 16.f });
-	rect[1].setPosition({565.f, 800.f});	
+	rect[1].setPosition({ 565.f, 800.f });
 	rect[1].setScale({ 1.5f, 1.5f });
 
-	rect[2].setSize({64.f, 88.f});
-	rect[2].setPosition({ 680.f, 380.f });
+	rect[2].setSize({ 64.f, 88.f });
+	rect[2].setPosition({ 680.f, 600.f });
 	rect[2].setScale({ 1.5f, 1.5f });
 
 	rect[3].setSize({ 53.f,87.f });
-	rect[3].setPosition({240.f,356.f});
+	rect[3].setPosition({ 240.f,356.f });
 	rect[3].setScale({ 1.5f, 1.5f });
 
 	rect[4].setSize({ 100.f,60.f });
-	rect[4].setPosition({800.f, 360.f});
+	rect[4].setPosition({ 800.f, 360.f });
 	rect[4].setScale({ 1.f, 1.f });
 
-	text->SetString("message");
+	Utils::SetOrigin(windowRect, Origins::BC);
+	windowRect.setSize({ 100.f, 60.f });
+	windowRect.setPosition({ 800.f, 400.f });
+	windowRect.setScale({ 1.f, 1.f });
+	windowRect.setFillColor(sf::Color::Transparent);
+	windowRect.setOutlineColor(sf::Color::White);
+	windowRect.setOutlineThickness(2);
+
 	text->SetActive(false);
-	text->SetPosition({ 600.f, 700.f });
-	text->SetStringSize(10);
 
 	inventory->sortingLayer = SortingLayers::UI;
 	inventory->sortingOrder = 1;
 
 	inventory->SetOrigin(Origins::MC);
-	inventory->SetPosition({1240 * 0.5f, 960 * 0.5f});
+	inventory->SetPosition({ 1240 * 0.5f, 960 * 0.5f });
+	inventory->SetScale({ 4.f, 4.f });
 	inventory->SetActive(false);
 
 	for (int i = 0; i < 4; i++)
@@ -130,14 +136,26 @@ void Map001::Init()
 
 	getRemocon = false;
 	isCollision = false;
+
+	int beforeScene = niko->GetBeforeScene();
+
+	if (beforeScene == 2)
+	{
+		niko->SetPosition({ 40.f, 540.f });
+	}
+
+	if (beforeScene == 3)
+	{
+		niko->SetPosition({ 565.f, 790.f });
+	}
 }
 
 void Map001::Enter()
 {
-	//sf::Vector2f nikopos = niko->GetPosition();
+	sf::Vector2f nikopos = niko->GetPosition();
 
-	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	//worldView.setCenter(nikopos.x, nikopos.y);
+	worldView.setSize({ 640, 480 });
+	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map001.png");
 	FONT_MGR.Load("Fonts/HMFMPYUN.ttf");
@@ -159,23 +177,22 @@ void Map001::Update(float dt)
 
 	sf::Vector2f nikoPos = niko->GetPosition();
 	sf::FloatRect nikoBound = niko->GetGlobalBounds();
-	sf::FloatRect windowBound = rect[4].getGlobalBounds();
+	sf::FloatRect windowBound = windowRect.getGlobalBounds();
+	sf::FloatRect computerBound = computer->GetLocalBounds();
 
-	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	//worldView.setCenter(pos.x, pos.y);
+	worldView.setSize({ 840, 680 });
+	worldView.setCenter(nikoPos.x, nikoPos.y);
 
 	HitBox& nikoHitBox = niko->GetHitBox();
 	HitBox& computerHitBox = computer->GetHitBox();
 	HitBox& remoconHitBox = remocon->GetHitBox();
+	HitBox& bookcaseHitBox = bookcase->GetHitBox();
 
 	HitBox toiletDoorHitBox;
 	toiletDoorHitBox.UpdateTr(rect[0], rect[0].getLocalBounds());
 
 	HitBox livingroom;
 	livingroom.UpdateTr(rect[1], rect[1].getLocalBounds());
-
-	HitBox bookHitBox;
-	bookHitBox.UpdateTr(rect[2], rect[2].getLocalBounds());
 
 	if (getRemocon == false)
 	{
@@ -195,7 +212,8 @@ void Map001::Update(float dt)
 		}
 	}
 
-	if (getRemocon == true && nikoBound.intersects(windowBound));
+
+	if (getRemocon == true && nikoBound.intersects(windowBound))
 	{
 		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
@@ -204,20 +222,21 @@ void Map001::Update(float dt)
 			text->SetOrigin(Origins::MC);
 			text->SetPosition({ 500.f, 500.f });
 			text->SetActive(true);
-			a = true;
+			isPasswordVisible = true;
 		}
 	}
-
-	if (getRemocon == true)
+	else if (getRemocon == true && isPasswordVisible == true)
 	{
-		if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
 			text->SetActive(false);
+			isPasswordVisible = false;
 		}
 	}
 
 	if (Utils::CheckCollision(nikoHitBox, computerHitBox))
-	{niko->SetSpeed(0.f);
+	{
+		niko->SetSpeed(0.f);
 
 		if (InputMgr::GetKey(sf::Keyboard::Down))
 		{
@@ -282,7 +301,7 @@ void Map001::Update(float dt)
 
 			password[selectIndex]->SetText(std::to_string(s));
 
-			if (s == 5 && InputMgr::GetKeyDown(sf::Keyboard::Enter))
+			if (s == 5 && InputMgr::GetKeyDown(sf::Keyboard::Z))
 			{
 				for (int i = 0; i < 4; i++)
 				{
@@ -295,7 +314,7 @@ void Map001::Update(float dt)
 				passwordIsActive = false;
 				niko->SetPosition({ nikoPos.x, nikoPos.y + 1 });
 			}
-			else if(InputMgr::GetKeyDown(sf::Keyboard::Enter))
+			else if (nikoBound.intersects(computerBound) && InputMgr::GetKeyDown(sf::Keyboard::Z))
 			{
 				for (int i = 0; i < 4; i++)
 				{
@@ -323,7 +342,7 @@ void Map001::Update(float dt)
 		text->SetString("LOCK!!");
 		text->SetStringSize(200);
 		text->SetOrigin(Origins::MC);
-		text->SetPosition({600.f, 500.f});
+		text->SetPosition({ 600.f, 500.f });
 		text->SetActive(true);
 
 		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
@@ -336,6 +355,7 @@ void Map001::Update(float dt)
 
 	if (solvePassword == true && Utils::CheckCollision(nikoHitBox, toiletDoorHitBox))
 	{
+		niko->SetBeforeScene(1);
 		SCENE_MGR.ChangeScene(SceneIds::Map002);
 	}
 
@@ -348,7 +368,7 @@ void Map001::Update(float dt)
 		text->SetPosition({ 600.f, 500.f });
 		text->SetActive(true);
 
-		if (InputMgr::GetKey(sf::Keyboard::Z));
+		if (InputMgr::GetKey(sf::Keyboard::Z))
 		{
 			text->SetActive(false);
 			niko->SetSpeed(100.f);
@@ -358,6 +378,7 @@ void Map001::Update(float dt)
 
 	if (solvePassword == true && Utils::CheckCollision(nikoHitBox, livingroom))
 	{
+		niko->SetBeforeScene(1);
 		SCENE_MGR.ChangeScene(SceneIds::Map003);
 	}
 
@@ -370,6 +391,16 @@ void Map001::Update(float dt)
 	{
 		remocon->SetActive(false);
 	}
+
+	if (Utils::CheckCollision(nikoHitBox, bookcaseHitBox))
+	{
+		niko->SetSpeed(0.f);
+	}
+
+	if (Utils::CheckCollision(nikoHitBox, bookcaseHitBox) && InputMgr::GetKey(sf::Keyboard::Down))
+	{
+		niko->SetSpeed(100.f);
+	}
 }
 
 void Map001::Draw(sf::RenderWindow& window)
@@ -379,4 +410,5 @@ void Map001::Draw(sf::RenderWindow& window)
 	{
 		window.draw(rect[i]);
 	}
+	window.draw(windowRect);
 }

@@ -1,19 +1,17 @@
 #pragma once
+#include "stdafx.h"
+#include "GameObject.h"
 
-class TileMap : public GameObject
+class Fire : public GameObject
 {
 protected:
-	sf::VertexArray va;
-	std::string spriteSheetId = "graphics/background_sheet.png";
-	sf::Texture* texture = nullptr;
-	sf::Transform transform;
+	sf::Sprite body;
 
-	sf::Vector2i cellCount;
-	sf::Vector2f cellSize;
+	sf::Vector2f pos;
 
 public:
-	TileMap(const std::string& name = "");
-	~TileMap() = default;
+	Fire(const std::string& name = "");
+	~Fire() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -22,16 +20,15 @@ public:
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
+	sf::Sprite GetSprite() { return body; }
+	sf::Vector2f GetPosition();
 	sf::FloatRect GetLocalBounds() const override;
 	sf::FloatRect GetGlobalBounds() const override;
-	sf::FloatRect GetMapBounds() const;
 
 	void Init() override;
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-
-	void Set(const sf::Vector2i& count, const sf::Vector2f& size);
-	void UpdateTransform();
 };
+

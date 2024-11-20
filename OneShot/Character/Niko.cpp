@@ -60,10 +60,23 @@ sf::Vector2f Niko::GetPosition()
 	return nikoPosition;
 }
 
+void Niko::SetTexutreID(const std::string& id)
+{
+	textureId = id;
+}
+
+void Niko::SetBranchGet()
+{
+	getBranch = true;
+}
+
+void Niko::SetBeforeScene(int current)
+{
+	beforeScene = current;
+}
+
 void Niko::Init()
 {
-	std::string textureId = "Graphics/Characters/niko.png";
-
 	int width = 48;
 	int height = 64;
 
@@ -164,7 +177,7 @@ void Niko::Release()
 
 void Niko::Reset()
 {
-	body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/niko.png"));
+	body.setTexture(TEXTURE_MGR.Get(textureId));
 	body.setTextureRect({ 0,0,48,64 });
 	SetOrigin(Origins::TL);
 }

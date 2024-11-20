@@ -10,6 +10,9 @@ class Refrigerator;
 class Sink;
 class Door;
 class LightDoor;
+class Message;
+class Fire;
+class ItemStar;
 
 class Map003 : public Scene
 {
@@ -23,8 +26,19 @@ protected:
 	Sink* sink;
 	Door* door;
 	LightDoor* lightdoor;
+	Message* text;
+	Fire* fire;
+	ItemStar* itemStar;
 
 	SpriteGo* lightdoorSprite;
+
+	sf::RectangleShape rect;
+
+	bool getBottle = false;
+	bool getBranch = true;
+	bool getFiredBranch = false;
+	bool getKey = false;
+	bool lock = false;
 
 public:
 	Map003();

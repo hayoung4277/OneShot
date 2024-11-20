@@ -1,25 +1,17 @@
 #pragma once
+#include "stdafx.h"
+#include "GameObject.h"
 
-enum class Upgrade
-{
-	RateOfFire,
-	ClipSize,
-	MaxHealth,
-	RunSpeed,
-	HealthPickups,
-	AmmoPickups,
-	Count,
-};
-
-class UiUpgrade : public GameObject
+class DryFlower : public GameObject
 {
 protected:
-	std::vector<sf::Text> upgrades;
-	sf::Sprite background;
+	sf::Sprite body;
+
+	sf::Vector2f pos;
 
 public:
-	UiUpgrade(const std::string& name = "");
-	~UiUpgrade() = default;
+	DryFlower(const std::string& name = "");
+	~DryFlower() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -28,11 +20,15 @@ public:
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
+	sf::Sprite GetSprite() { return body; }
+	sf::Vector2f GetPosition();
+	sf::FloatRect GetLocalBounds() const override;
+	sf::FloatRect GetGlobalBounds() const override;
+
 	void Init() override;
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
-	void FixedUpdate(float dt) override;
-
 	void Draw(sf::RenderWindow& window) override;
 };
+

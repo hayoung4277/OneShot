@@ -57,7 +57,7 @@ sf::FloatRect Inventory::GetGlobalBounds() const
 
 void Inventory::Init()
 {
-    std::string textureId = "Graphics/Windowskins/InventoryUI.png";
+    std::string textureId = "Graphics/Windowskins/inventoryUI.png";
 }
 
 void Inventory::Release()
@@ -66,8 +66,8 @@ void Inventory::Release()
 
 void Inventory::Reset()
 {
-    body.setTexture(TEXTURE_MGR.Get("Graphics/Windowskins/InventoryUI.png"));
-    SetOrigin(Origins::TL);
+    body.setTexture(TEXTURE_MGR.Get("Graphics/Windowskins/inventoryUI.png"));
+    SetOrigin(Origins::MC);
 }
 
 void Inventory::Update(float dt)

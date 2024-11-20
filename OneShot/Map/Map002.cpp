@@ -1,13 +1,10 @@
 #include "Map002.h"
 #include "Niko.h"
 #include "Message.h"
-
-sf::RectangleShape Map002::nikoRect(sf::Vector2f(48.f, 64.f));
-sf::RectangleShape Map002::flowerRect(sf::Vector2f({ 32.f, 26.f }));
-sf::RectangleShape Map002::sinkRect(sf::Vector2f({ 32.f, 43.f }));
-sf::RectangleShape Map002::toiletRect(sf::Vector2f({ 29.f, 53.f }));
-sf::RectangleShape Map002::bathRect(sf::Vector2f({ 64.f, 34.f }));
-sf::RectangleShape Map002::rect(sf::Vector2f(16.f, 32.f));
+#include "Bath.h"
+#include "DryFlower.h"
+#include "Toilet.h"
+#include "ToiletSink.h"
 
 Map002::Map002()
 	:Scene(SceneIds::Map002)
@@ -19,6 +16,10 @@ void Map002::Init()
 	map002 = AddGo(new SpriteGo("Graphics/Map/map002.png"));
 	niko = AddGo(new Niko("Niko"));
 	text = AddGo(new Message("Text"));
+	bath = AddGo(new Bath("Bath"));
+	dryflower = AddGo(new DryFlower("DryFlower"));
+	toilet = AddGo(new Toilet("Toilet"));
+	sink = AddGo(new ToiletSink("Sink"));
 
 	Scene::Init();
 
@@ -34,33 +35,28 @@ void Map002::Init()
 
 	niko->SetOrigin(Origins::BC);
 	niko->SetScale({ 1.5f, 1.5f });
-	niko->SetPosition({ 600.f, 620.f });
+	niko->SetPosition({ 500.f, 520.f });
 
-	Utils::SetOrigin(nikoRect, Origins::BC);
-	nikoRect.setPosition(niko->GetPosition());
-	nikoRect.setFillColor(sf::Color::Transparent);
-	nikoRect.setOutlineColor(sf::Color::Green);
-	nikoRect.setOutlineThickness(1);
+	dryflower->sortingLayer = SortingLayers::Foreground;
+	dryflower->sortingOrder = 1;
+	dryflower->SetPosition({ 600.f, 570.f });
+	dryflower->SetScale({ 1.f, 1.f });
 
-	Utils::SetOrigin(rect, Origins::MC);
-	rect.setPosition({ 730.f, 710.f });
-	rect.setScale({ 1.5f, 1.5f });
+	sink->sortingLayer = SortingLayers::Foreground;
+	sink->sortingOrder = 1;
+	sink->SetPosition({ 440.f, 480.f });
+	sink->SetScale({2.f, 2.f});
 
-	Utils::SetOrigin(flowerRect, Origins::BC);
-	flowerRect.setPosition({ 610.f, 580.f });
-	flowerRect.setScale({ 1.f, 1.f });
+	toilet->sortingLayer = SortingLayers::Foreground;
+	toilet->sortingOrder = 1;
+	toilet->SetPosition({ 340.f, 485.f });
+	toilet->SetScale({ 2.f, 2.f });
 
-	Utils::SetOrigin(sinkRect, Origins::BC);
-	sinkRect.setPosition({ 475.f, 515.f });
-	sinkRect.setScale({2.f, 2.f});
-
-	Utils::SetOrigin(toiletRect, Origins::BC);
-	toiletRect.setPosition({ 365.f, 535.f });
-	toiletRect.setScale({ 2.f, 2.f });
-
-	Utils::SetOrigin(bathRect, Origins::BC);
-	bathRect.setPosition({ 355.f, 750.f });
-	bathRect.setScale({ 2.f, 2.f });
+	bath->sortingLayer = SortingLayers::Foreground;
+	bath->sortingOrder = 3;
+	bath->SetOrigin(Origins::TL);
+	bath->SetPosition({ 295.f, 650.f });
+	bath->SetScale({ 2.f, 2.f });
 
 	doorRect.setSize({ 16.f, 32.f });
 	Utils::SetOrigin(doorRect, Origins::MC);
@@ -70,14 +66,21 @@ void Map002::Init()
 	text->SetActive(false);
 
 	getBranch = false;
+
+	int beforeScene = niko->GetBeforeScene();
+
+	if (beforeScene == 1)
+	{
+		niko->SetPosition({ 500.f, 520.f });
+	}
 }
 
 void Map002::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	worldView.setCenter(nikopos.x, nikopos.y);
+	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	//worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map002.png");
 
@@ -97,75 +100,75 @@ void Map002::Update(float dt)
 
 	sf::Vector2f pos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	worldView.setCenter(pos.x, pos.y);
+	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	//worldView.setCenter(pos.x, pos.y);
 
 	sf::FloatRect doorRectHitBox = doorRect.getLocalBounds();
 
 	HitBox& nikoHitBox = niko->GetHitBox();
+	HitBox& bathHitBox = bath->GetHitBox();
+	HitBox& dryflowerHitBox = dryflower->GetHitBox();
+	HitBox& toiletHitBox = toilet->GetHitBox();
+	HitBox& sinkHitBox = sink->GetHitBox();
 	HitBox doorHitBox;
 	doorHitBox.UpdateTr(doorRect, doorRectHitBox);
 
-	nikoRect.setPosition(pos);
-
-	if (Utils::CheckCollision(nikoRect, flowerRect))
+	if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox))
 	{
 		niko->SetSpeed(0.f);
 	}
 
-	if (Utils::CheckCollision(nikoRect, sinkRect))
+	if (Utils::CheckCollision(nikoHitBox, sinkHitBox))
 	{
 		niko->SetSpeed(0.f);
 	}
 
-	if (Utils::CheckCollision(nikoRect, toiletRect))
+	if (Utils::CheckCollision(nikoHitBox, toiletHitBox))
 	{
 		niko->SetSpeed(0.f);
 	}
 
-	if (Utils::CheckCollision(nikoRect, bathRect))
+	if (Utils::CheckCollision(nikoHitBox, bathHitBox))
 	{
 		niko->SetSpeed(0.f);
 	}
-
-	if (Utils::CheckCollision(nikoRect, rect))
+	
+	if(getBranch == false)
 	{
-		SCENE_MGR.ChangeScene(SceneIds::Map001);
+		if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox) && InputMgr::GetKey(sf::Keyboard::Z))
+		{
+			text->SetString("Get Branch!");
+			text->SetStringSize(50);
+			text->SetActive(true);
+			niko->SetBranchGet();
+			niko->SetPosition({ pos.x - 1, pos.y });
+			niko->SetSpeed(0.f);
+		}
+		else if (niko->IsGetBranch() == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
+		{
+			text->SetActive(false);
+			niko->SetSpeed(100.f);
+		}
 	}
 
-	if (Utils::CheckCollision(nikoRect, flowerRect) && InputMgr::GetKey(sf::Keyboard::Z))
-	{
-		text->SetString("Get Branch!");
-		text->SetStringSize(50);
-		text->SetActive(true);
-		getBranch = true;
-		niko->SetSpeed(0.f);
-	}
-
-	if (getBranch == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
-	{
-		text->SetActive(false);
-		niko->SetSpeed(100.f);
-		niko->SetPosition({ pos.x - 1, pos.y });
-	}
-
-	if (Utils::CheckCollision(nikoRect, flowerRect) && InputMgr::GetKey(sf::Keyboard::Left))
+	if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox) && InputMgr::GetKey(sf::Keyboard::Left))
 	{
 		niko->SetSpeed(100.f);
 	}
 
-	if (Utils::CheckCollision(nikoRect, sinkRect) && InputMgr::GetKey(sf::Keyboard::Down))
-	{
-		niko->SetSpeed(100.f);
-	}
-
-	if (Utils::CheckCollision(nikoRect, toiletRect) && InputMgr::GetKey(sf::Keyboard::Down)
+	if (Utils::CheckCollision(nikoHitBox, sinkHitBox) && InputMgr::GetKey(sf::Keyboard::Down)
 		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
 	{
 		niko->SetSpeed(100.f);
 	}
 
-	if (Utils::CheckCollision(nikoRect, bathRect) && InputMgr::GetKey(sf::Keyboard::Up)
+	if (Utils::CheckCollision(nikoHitBox, toiletHitBox) && InputMgr::GetKey(sf::Keyboard::Down)
+		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
+	{
+		niko->SetSpeed(100.f);
+	}
+
+	if (Utils::CheckCollision(nikoHitBox, bathHitBox) && InputMgr::GetKey(sf::Keyboard::Up)
 		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
 	{
 		niko->SetSpeed(100.f);
@@ -173,7 +176,9 @@ void Map002::Update(float dt)
 
 	if (Utils::CheckCollision(nikoHitBox, doorHitBox))
 	{
+		niko->SetBeforeScene(2);
 		SCENE_MGR.ChangeScene(SceneIds::Map001);
+
 	}
 }
 
