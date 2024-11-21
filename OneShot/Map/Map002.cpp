@@ -35,7 +35,7 @@ void Map002::Init()
 
 	niko->SetOrigin(Origins::BC);
 	niko->SetScale({ 1.5f, 1.5f });
-	niko->SetPosition({ 500.f, 520.f });
+	niko->SetPosition({ 650.f, 620.f });
 
 	dryflower->sortingLayer = SortingLayers::Foreground;
 	dryflower->sortingOrder = 1;
@@ -68,19 +68,14 @@ void Map002::Init()
 	getBranch = false;
 
 	int beforeScene = niko->GetBeforeScene();
-
-	if (beforeScene == 1)
-	{
-		niko->SetPosition({ 500.f, 520.f });
-	}
 }
 
 void Map002::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	//worldView.setCenter(nikopos.x, nikopos.y);
+	worldView.setSize({ 840, 680 });
+	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map002.png");
 
@@ -100,8 +95,8 @@ void Map002::Update(float dt)
 
 	sf::Vector2f pos = niko->GetPosition();
 
-	//worldView.setSize(FRAMEWORK.GetWindowSizeF());
-	//worldView.setCenter(pos.x, pos.y);
+	worldView.setSize({ 840, 680 });
+	worldView.setCenter(pos.x, pos.y);
 
 	sf::FloatRect doorRectHitBox = doorRect.getLocalBounds();
 
@@ -185,5 +180,5 @@ void Map002::Update(float dt)
 void Map002::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	window.draw(doorRect);
+	//window.draw(doorRect);
 }

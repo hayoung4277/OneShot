@@ -37,7 +37,7 @@ void SceneTitle::Init()
 	startBtn->SetPosition({ 640.f + 200.f, 480.f + 380.f });
 	startBtn->SetFontSize(50);
 	startBtn->SetOrigin(Origins::MC);
-	startBtn->SetText(std::to_string(s));
+	startBtn->SetText("START");
 
 	quitBtn->sortingLayer = SortingLayers::UI;
 	quitBtn->sortingOrder = 1;
@@ -92,11 +92,6 @@ void SceneTitle::Update(float dt)
 	}
 
 	HitBox& startBtnHitBox = startBtn->GetHitBox();
-
-	if (InputMgr::GetKeyDown(sf::Keyboard::Down))
-	{
-		s++;
-	}
 
 	if (InputMgr::GetMouseButtonDown(sf::Mouse::Left)) {
 		if (startBtn->IsCursorOn()) {

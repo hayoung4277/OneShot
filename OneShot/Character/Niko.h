@@ -32,9 +32,7 @@ protected:
 	sf::Vector2f nikoPosition;
 
 	bool getBranch = false;
-
-	//std::list<GameObject*> getItems;
-	//std::list<GameObject*> useItems;
+	bool isBulb = false;
 
 public:
 	Niko(const std::string& name = "");
@@ -54,13 +52,14 @@ public:
 	void SetSpeed(float speed);
 	sf::Vector2f GetPosition();
 
-	void SetTexutreID(const std::string& id);
-
 	void SetBranchGet();
 	bool IsGetBranch() { return getBranch; }
 
 	void SetBeforeScene(int current);
 	int GetBeforeScene() { return beforeScene; }
+
+	void SetISBulb(bool is);
+	bool GetIsBulb() { return isBulb; }
 
 	//const std::list<GameObject*>& GetItemList() const { return getItems; }
 	//const std::list<GameObject*>& UseItemList() const { return useItems; }

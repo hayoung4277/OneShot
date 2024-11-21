@@ -24,7 +24,7 @@ void Map004_1::Init()
 	niko->sortingLayer = SortingLayers::Foreground;
 	niko->sortingOrder = 2;
 	niko->SetOrigin(Origins::BC);
-	niko->SetPosition({-20.f, 120.f});
+	niko->SetPosition({-20.f, 150.f});
 	niko->SetScale({1.5f, 1.5f});
 
 	text->SetActive(false);
@@ -39,7 +39,7 @@ void Map004_1::Init()
 	}
 
 	rect[0].setSize({16.f, 32.f});
-	rect[0].setPosition({-30.f, 120.f});
+	rect[0].setPosition({-30.f, 150.f});
 	rect[1].setSize({16.f, 32.f});
 	rect[1].setPosition({740.f, 810.f});
 
@@ -51,6 +51,11 @@ void Map004_1::Init()
 
 void Map004_1::Enter()
 {
+	sf::Vector2f nikopos = niko->GetPosition();
+
+	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setCenter(nikopos.x, nikopos.y);
+
 	TEXTURE_MGR.Load("Graphics/Map/map004-1.png");
 
 	Scene::Enter();
@@ -66,6 +71,24 @@ void Map004_1::Exit()
 void Map004_1::Update(float dt)
 {
 	Scene::Update(dt);
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Left) || InputMgr::GetKeyDown(sf::Keyboard::Right)
+		|| InputMgr::GetKeyDown(sf::Keyboard::Up) || InputMgr::GetKeyDown(sf::Keyboard::Down))
+	{
+		if (niko->GetIsBulb() == true)
+		{
+			niko->SetISBulb(true);
+		}
+		else if (niko->GetIsBulb() == false)
+		{
+			niko->SetISBulb(false);
+		}
+	}
+
+	sf::Vector2f nikopos = niko->GetPosition();
+
+	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setCenter(nikopos.x, nikopos.y);
 
 	sf::FloatRect doorFloatRect = rect[0].getLocalBounds();
 	sf::FloatRect basementFloatRect = rect[1].getLocalBounds();
@@ -92,9 +115,9 @@ void Map004_1::Update(float dt)
 
 void Map004_1::Draw(sf::RenderWindow& window)
 {
+	Scene::Draw(window);
 	for (int i = 0; i < 2; i++)
 	{
 		window.draw(rect[i]);
 	}
-	Scene::Draw(window);
 }

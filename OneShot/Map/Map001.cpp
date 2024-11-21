@@ -154,7 +154,7 @@ void Map001::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize({ 640, 480 });
+	worldView.setSize({ 840, 680 });
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map001.png");
@@ -224,24 +224,16 @@ void Map001::Update(float dt)
 			text->SetActive(true);
 			isPasswordVisible = true;
 		}
-	}
-	else if (getRemocon == true && isPasswordVisible == true)
-	{
-		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
+		if (isPasswordVisible == true && InputMgr::GetKeyDown(sf::Keyboard::Enter))
 		{
 			text->SetActive(false);
-			isPasswordVisible = false;
 		}
 	}
+
 
 	if (Utils::CheckCollision(nikoHitBox, computerHitBox))
 	{
 		niko->SetSpeed(0.f);
-
-		if (InputMgr::GetKey(sf::Keyboard::Down))
-		{
-			niko->SetSpeed(100.f);
-		}
 
 		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
@@ -301,7 +293,7 @@ void Map001::Update(float dt)
 
 			password[selectIndex]->SetText(std::to_string(s));
 
-			if (s == 5 && InputMgr::GetKeyDown(sf::Keyboard::Z))
+			if (s == 5 && InputMgr::GetKeyDown(sf::Keyboard::Enter))
 			{
 				for (int i = 0; i < 4; i++)
 				{
@@ -314,7 +306,7 @@ void Map001::Update(float dt)
 				passwordIsActive = false;
 				niko->SetPosition({ nikoPos.x, nikoPos.y + 1 });
 			}
-			else if (nikoBound.intersects(computerBound) && InputMgr::GetKeyDown(sf::Keyboard::Z))
+			else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 			{
 				for (int i = 0; i < 4; i++)
 				{
@@ -329,6 +321,7 @@ void Map001::Update(float dt)
 			}
 		}
 	}
+
 
 	if (solvePassword == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
 	{
@@ -368,11 +361,11 @@ void Map001::Update(float dt)
 		text->SetPosition({ 600.f, 500.f });
 		text->SetActive(true);
 
-		if (InputMgr::GetKey(sf::Keyboard::Z))
+		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
 			text->SetActive(false);
-			niko->SetSpeed(100.f);
 			niko->SetPosition({ nikoPos.x + 1, nikoPos.y });
+			niko->SetSpeed(100.f);
 		}
 	}
 
@@ -380,11 +373,6 @@ void Map001::Update(float dt)
 	{
 		niko->SetBeforeScene(1);
 		SCENE_MGR.ChangeScene(SceneIds::Map003);
-	}
-
-	if (solvePassword == false && Utils::CheckCollision(nikoHitBox, livingroom))
-	{
-		niko->SetSpeed(0.f);
 	}
 
 	if (getRemocon == true)
@@ -406,9 +394,9 @@ void Map001::Update(float dt)
 void Map001::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	for (int i = 0; i < 5; i++)
+	/*for (int i = 0; i < 5; i++)
 	{
 		window.draw(rect[i]);
 	}
-	window.draw(windowRect);
+	window.draw(windowRect);*/
 }

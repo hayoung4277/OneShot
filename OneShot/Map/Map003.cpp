@@ -118,13 +118,13 @@ void Map003::Init()
 	itemStar->SetScale({ 2.f,2.f });
 	itemStar->SetActive(false);
 
-	rect.setSize({16.f, 32.f});
+	rect.setSize({ 16.f, 32.f });
 	Utils::SetOrigin(rect, Origins::BC);
 	rect.setFillColor(sf::Color::Transparent);
 	rect.setOutlineColor(sf::Color::White);
 	rect.setOutlineThickness(2);
-	rect.setPosition({1100.f, 440.f});
-	rect.setScale({1.5f, 1.5f});
+	rect.setPosition({ 1100.f, 440.f });
+	rect.setScale({ 1.5f, 1.5f });
 
 	text->SetActive(false);
 
@@ -136,7 +136,7 @@ void Map003::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setSize({ 840, 680 });
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map003.png");
@@ -159,7 +159,7 @@ void Map003::Update(float dt)
 
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setSize({ 840, 680 });
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	lightdoorSprite->SetPosition({ nikopos.x, nikopos.y });
@@ -187,7 +187,7 @@ void Map003::Update(float dt)
 			niko->SetSpeed(100.f);
 		}
 	}
-	
+
 	if (getBranch == true && getBottle == true && Utils::CheckCollision(nikoHitbox, tvHitbox))
 	{
 		if (InputMgr::GetKeyDown(sf::Keyboard::Z))
@@ -196,17 +196,21 @@ void Map003::Update(float dt)
 			text->SetStringSize(100);
 			text->SetOrigin(Origins::MC);
 			text->SetPosition({ nikopos.x + 100.f, nikopos.y - 100.f });
-			niko->SetPosition({ nikopos.x, nikopos.y + 1 });
 			text->SetActive(true);
+			niko->SetPosition({ nikopos.x, nikopos.y + 1 });
 			getFiredBranch = true;
 			lock = false;
 		}
-		else if (getFiredBranch == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
+		/*else if (getFiredBranch == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
 			text->SetActive(false);
-			//niko->SetPosition({ nikopos.x, nikopos.y + 1 });
 			niko->SetSpeed(100.f);
-		}
+		}*/
+	}
+	else if (getFiredBranch == true && InputMgr::GetKeyDown(sf::Keyboard::Enter))
+	{
+		text->SetActive(false);
+		niko->SetSpeed(100.f);
 	}
 
 	if (Utils::CheckCollision(nikoHitbox, FPHitBox))
@@ -252,12 +256,13 @@ void Map003::Update(float dt)
 		text->SetStringSize(100);
 		text->SetOrigin(Origins::MC);
 		text->SetPosition({ nikopos.x - 350.f, nikopos.y - 300.f });
-		niko->SetPosition({ nikopos.x, nikopos.y + 1 });
 		text->SetActive(true);
+		niko->SetPosition({ nikopos.x, nikopos.y + 1 });
 		getBottle = true;
 		lock = false;
+
 	}
-	else if (getBottle == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
+	else if (getBottle == true && InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		text->SetActive(false);
 		//niko->SetPosition({ nikopos.x, nikopos.y + 1 });
@@ -375,5 +380,5 @@ void Map003::Update(float dt)
 void Map003::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	window.draw(rect);
+	//window.draw(rect);
 }

@@ -60,11 +60,6 @@ sf::Vector2f Niko::GetPosition()
 	return nikoPosition;
 }
 
-void Niko::SetTexutreID(const std::string& id)
-{
-	textureId = id;
-}
-
 void Niko::SetBranchGet()
 {
 	getBranch = true;
@@ -73,6 +68,22 @@ void Niko::SetBranchGet()
 void Niko::SetBeforeScene(int current)
 {
 	beforeScene = current;
+}
+
+void Niko::SetISBulb(bool is)
+{
+	if (is == true)
+	{
+		isBulb = true;
+		textureId = "Graphics/Characters/niko_bulb.png";
+		Reset();
+	}
+	else
+	{
+		isBulb = false;
+		textureId = "Graphics/Characters/niko.png";
+		Reset();
+	}
 }
 
 void Niko::Init()
