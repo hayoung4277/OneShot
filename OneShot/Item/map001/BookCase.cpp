@@ -56,7 +56,7 @@ sf::FloatRect BookCase::GetGlobalBounds() const
 
 void BookCase::Init()
 {
-    std::string textureId = "Graphics/Characters/bookcase.png";
+    std::string textureId = "Graphics/MapSource/bookcase.png";
 }
 
 void BookCase::Release()
@@ -65,19 +65,19 @@ void BookCase::Release()
 
 void BookCase::Reset()
 {
-    body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/bookcase.png"));
-    SetOrigin(Origins::MC);
+    body.setTexture(TEXTURE_MGR.Get("Graphics/MapSource/bookcase.png"));
+    SetOrigin(Origins::TL);
 }
 
 void BookCase::Update(float dt)
 {
-    sf::FloatRect bookcaseFloatRect = body.getLocalBounds();
+    sf::FloatRect bookcaseFloatRect = body.getGlobalBounds();
 
     hitbox.UpdateTr(body, bookcaseFloatRect);
 }
 
 void BookCase::Draw(sf::RenderWindow& window)
 {
-    hitbox.Draw(window);
     window.draw(body);
+    hitbox.Draw(window);
 }

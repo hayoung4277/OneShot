@@ -26,3 +26,8 @@ void HitBox::Draw(sf::RenderWindow& window)
 	if (Variables::isDrawHitBox)
 		window.draw(rect);
 }
+
+void HitBox::SetOrigin(Origins preset)
+{
+	Utils::SetOrigin(rect, preset);
+}

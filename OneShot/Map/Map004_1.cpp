@@ -24,7 +24,7 @@ void Map004_1::Init()
 	niko->sortingLayer = SortingLayers::Foreground;
 	niko->sortingOrder = 2;
 	niko->SetOrigin(Origins::BC);
-	niko->SetPosition({-20.f, 150.f});
+	niko->SetPosition({160.f, 100.f});
 	niko->SetScale({1.5f, 1.5f});
 
 	text->SetActive(false);
@@ -39,21 +39,29 @@ void Map004_1::Init()
 	}
 
 	rect[0].setSize({16.f, 32.f});
-	rect[0].setPosition({-30.f, 150.f});
+	rect[0].setPosition({140.f, 180.f});
 	rect[1].setSize({16.f, 32.f});
-	rect[1].setPosition({740.f, 810.f});
+	rect[1].setPosition({830.f, 810.f});
 
-	if (niko->GetBeforeScene() == 5)
+	/*int beforeScene = niko->GetBeforeScene();
+
+	if (beforeScene == 5)
 	{
-		niko->SetPosition({730.f, 790.f});
-	}
+		niko->SetPosition({800.f, 810.f});
+	}*/
 }
 
 void Map004_1::Enter()
 {
+	int beforeScene = niko->GetBeforeScene();
+
+	if (beforeScene == 5)
+	{
+		niko->SetPosition({ 800.f, 810.f });
+	}
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setSize({ 840, 680 });
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map004-1.png");
@@ -71,23 +79,24 @@ void Map004_1::Exit()
 void Map004_1::Update(float dt)
 {
 	Scene::Update(dt);
-
-	if (InputMgr::GetKeyDown(sf::Keyboard::Left) || InputMgr::GetKeyDown(sf::Keyboard::Right)
-		|| InputMgr::GetKeyDown(sf::Keyboard::Up) || InputMgr::GetKeyDown(sf::Keyboard::Down))
-	{
-		if (niko->GetIsBulb() == true)
-		{
-			niko->SetISBulb(true);
-		}
-		else if (niko->GetIsBulb() == false)
-		{
-			niko->SetISBulb(false);
-		}
-	}
-
+	
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	if (InputMgr::GetKey(sf::Keyboard::Left))
+	{
+		nikopos.x -= 0.01f;
+		nikopos.y -= 0.045f;
+		niko->SetPosition({ nikopos.x, nikopos.y });
+	}
+
+	if (InputMgr::GetKey(sf::Keyboard::Right))
+	{
+		nikopos.x += 0.01f;
+		nikopos.y += 0.045f;
+		niko->SetPosition({ nikopos.x, nikopos.y });
+	}
+
+	worldView.setSize({840, 680});
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	sf::FloatRect doorFloatRect = rect[0].getLocalBounds();
@@ -116,8 +125,8 @@ void Map004_1::Update(float dt)
 void Map004_1::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	for (int i = 0; i < 2; i++)
-	{
-		window.draw(rect[i]);
-	}
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	window.draw(rect[i]);
+	//}
 }

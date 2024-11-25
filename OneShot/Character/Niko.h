@@ -22,6 +22,7 @@ protected:
 	std::string textureId = "Graphics/Characters/niko.png";
 
 	sf::Vector2f direction;
+	sf::Vector2f lastDirection = { 0.f, 0.f };
 	float speed = 100.f;
 
 	std::map<std::string, AnimationClip> temp;
@@ -58,11 +59,9 @@ public:
 	void SetBeforeScene(int current);
 	int GetBeforeScene() { return beforeScene; }
 
+	void SetTextureId(const std::string& id);
 	void SetISBulb(bool is);
 	bool GetIsBulb() { return isBulb; }
-
-	//const std::list<GameObject*>& GetItemList() const { return getItems; }
-	//const std::list<GameObject*>& UseItemList() const { return useItems; }
 
 	void Init() override;
 	void Release() override;

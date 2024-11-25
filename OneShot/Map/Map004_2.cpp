@@ -56,7 +56,7 @@ void Map004_2::Enter()
 {
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setSize({840, 680});
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	TEXTURE_MGR.Load("Graphics/Map/map004-2.png");
@@ -77,7 +77,7 @@ void Map004_2::Update(float dt)
 
 	sf::Vector2f nikopos = niko->GetPosition();
 
-	worldView.setSize(FRAMEWORK.GetWindowSizeF());
+	worldView.setSize({840, 680});
 	worldView.setCenter(nikopos.x, nikopos.y);
 
 	sf::Vector2f nikoPos = niko->GetPosition();
@@ -103,7 +103,9 @@ void Map004_2::Update(float dt)
 	{
 		bulb->SetActive(false);
 		niko->SetSpeed(100.f);
+		niko->SetTextureId("Graphics/Characters/niko_bulb.png");
 		niko->SetISBulb(true);
+		niko->Reset();
 	}
 
 	if (Utils::CheckCollision(nikoHitBox, doorHitBix))
@@ -116,8 +118,8 @@ void Map004_2::Update(float dt)
 void Map004_2::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	/*for (int i = 0; i < 2; i++)
-	{
-		window.draw(rect[i]);
-	}*/
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	window.draw(rect[i]);
+	//}
 }

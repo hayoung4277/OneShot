@@ -14,7 +14,7 @@ protected:
 
 	sf::RectangleShape rect[2];
 
-	sf::Vector2f mapScale = { 2.f, 2.f };
+	sf::Vector2f mapScale = { 1.f, 1.f };
 
 public:
 	Map004_1();

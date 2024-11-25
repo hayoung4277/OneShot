@@ -34,11 +34,17 @@ protected:
 
 	sf::RectangleShape rect;
 
+	sf::RectangleShape reRect;
+	sf::RectangleShape fpRect;
+	sf::RectangleShape tvRect;
+
 	bool getBottle = false;
 	bool getBranch = true;
 	bool getFiredBranch = false;
 	bool getKey = false;
 	bool lock = false;
+	bool isCollision = false;
+	bool isTextVisible = false;
 
 public:
 	Map003();

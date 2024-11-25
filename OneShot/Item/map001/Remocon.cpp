@@ -96,7 +96,7 @@ void Remocon::Reset()
 {
 	body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/remocon.png"));
 	body.setTextureRect({ 0,0,32,32 });
-	SetOrigin(Origins::MC);
+	SetOrigin(Origins::ML);
 }
 
 void Remocon::Update(float dt)

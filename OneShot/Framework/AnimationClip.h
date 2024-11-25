@@ -4,7 +4,7 @@ enum class AnimationLoopTypes
 {
 	Single,
 	Loop,
-	//PingPong,
+	PingPong,
 };
 
 struct AnimationFrame

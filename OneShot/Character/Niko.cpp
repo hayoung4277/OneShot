@@ -70,116 +70,19 @@ void Niko::SetBeforeScene(int current)
 	beforeScene = current;
 }
 
+void Niko::SetTextureId(const std::string& id)
+{
+	textureId = id;
+}
+
 void Niko::SetISBulb(bool is)
 {
-	if (is == true)
-	{
-		isBulb = true;
-		textureId = "Graphics/Characters/niko_bulb.png";
-		Reset();
-	}
-	else
-	{
-		isBulb = false;
-		textureId = "Graphics/Characters/niko.png";
-		Reset();
-	}
+	isBulb = is;
 }
 
 void Niko::Init()
 {
-	int width = 48;
-	int height = 64;
 
-	{
-		AnimationClip clip;
-		clip.id = "IdleDown";
-		clip.fps = 3;
-		clip.loopType = AnimationLoopTypes::Loop;
-		clip.frames.push_back({ textureId, {0, 0, width, height} });
-		temp.insert({ "IdleDown", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "IdleLeft";
-		clip.fps = 3;
-		clip.loopType = AnimationLoopTypes::Loop;
-		clip.frames.push_back({ textureId, {0, 1 * height, width, height} });
-		temp.insert({ "IdleLeft", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "IdleRight";
-		clip.fps = 3;
-		clip.loopType = AnimationLoopTypes::Loop;
-		clip.frames.push_back({ textureId, {0, 2 * height, width, height} });
-		temp.insert({ "IdleRight", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "Idleup";
-		clip.fps = 3;
-		clip.loopType = AnimationLoopTypes::Loop;
-		clip.frames.push_back({ textureId, {0, 3 * height, width, height} });
-		temp.insert({ "IdleUp", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "MoveUp";
-		clip.fps = 10;
-		clip.loopType = AnimationLoopTypes::Loop;
-		for (int i = 0; i < 4; ++i)
-		{
-			clip.frames.push_back({ textureId, { i * width, 3 * height, width, height } });
-		}
-		temp.insert({ "MoveUp", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "MoveDown";
-		clip.fps = 10;
-		clip.loopType = AnimationLoopTypes::Loop;
-		for (int i = 0; i < 4; ++i)
-		{
-			clip.frames.push_back({ textureId, { i * width, 0, width, height } });
-		}
-		temp.insert({ "MoveDown", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "MoveLeft";
-		clip.fps = 10;
-		clip.loopType = AnimationLoopTypes::Loop;
-		for (int i = 0; i < 4; ++i)
-		{
-			clip.frames.push_back({ textureId, { i * width, height, width, height } });
-		}
-		temp.insert({ "MoveLeft", clip });
-	}
-
-	{
-		AnimationClip clip;
-		clip.id = "MoveRight";
-		clip.fps = 10;
-		clip.loopType = AnimationLoopTypes::Loop;
-		for (int i = 0; i < 4; ++i)
-		{
-			clip.frames.push_back({ textureId, { i * width, 2 * height, width, height } });
-		}
-		temp.insert({ "MoveRight", clip });
-	}
-
-	clipInfos.push_back({ "IdleUp", "MoveUp" });
-	clipInfos.push_back({ "IdleLeft", "MoveLeft" });
-	clipInfos.push_back({ "IdleRihgt", "MoveRight" });
-
-	animator.SetTarget(&body);
 }
 
 void Niko::Release()
@@ -205,6 +108,7 @@ void Niko::Update(float dt)
 		Utils::Normailize(direction);
 	}
 
+	// 움직임 적용
 	SetPosition(position + direction * speed * dt);
 
 	if (InputMgr::GetKey(sf::Keyboard::LShift))
@@ -219,15 +123,15 @@ void Niko::Update(float dt)
 	sf::FloatRect nikoFloatRect = body.getGlobalBounds();
 
 	sf::Transformable a;
-	a.setPosition(body.getPosition().x + 24, body.getPosition().y + 36);
+	a.setPosition(body.getPosition().x + 18, body.getPosition().y + 27);
 
-	hitbox.UpdateTr(a, {nikoFloatRect.left, nikoFloatRect.top,
-		                    nikoFloatRect.width * 0.5f,
-		                    nikoFloatRect.height * 0.5f });
+	hitbox.UpdateTr(a, { nikoFloatRect.left, nikoFloatRect.top,
+							nikoFloatRect.width * 0.5f,
+							nikoFloatRect.height * 0.5f });
 }
 
 void Niko::Draw(sf::RenderWindow& window)
 {
-	hitbox.Draw(window);
 	window.draw(body);
+	hitbox.Draw(window);
 }

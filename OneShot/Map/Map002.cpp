@@ -42,10 +42,18 @@ void Map002::Init()
 	dryflower->SetPosition({ 600.f, 570.f });
 	dryflower->SetScale({ 1.f, 1.f });
 
+	Utils::SetOrigin(flowerRect, Origins::ML);
+	flowerRect.setSize({ 32.f, 32.f });
+	flowerRect.setPosition({ 570.f, 570.f });
+	flowerRect.setScale({ 1.f, 1.f });
+	flowerRect.setFillColor(sf::Color::Transparent);
+	flowerRect.setOutlineColor(sf::Color::White);
+	flowerRect.setOutlineThickness(2);
+
 	sink->sortingLayer = SortingLayers::Foreground;
 	sink->sortingOrder = 1;
 	sink->SetPosition({ 440.f, 480.f });
-	sink->SetScale({2.f, 2.f});
+	sink->SetScale({ 2.f, 2.f });
 
 	toilet->sortingLayer = SortingLayers::Foreground;
 	toilet->sortingOrder = 1;
@@ -61,7 +69,31 @@ void Map002::Init()
 	doorRect.setSize({ 16.f, 32.f });
 	Utils::SetOrigin(doorRect, Origins::MC);
 	doorRect.setScale({ 1.5f, 1.5f });
-	doorRect.setPosition({720.f, 700.f});
+	doorRect.setPosition({ 720.f, 700.f });
+
+	for (int i = 0; i < 4; i++)
+	{
+		hitboxRects[i].setFillColor(sf::Color::Transparent);
+		hitboxRects[i].setOutlineColor(sf::Color::Red);
+		hitboxRects[i].setOutlineThickness(1);
+		Utils::SetOrigin(hitboxRects[i], Origins::TL);
+	}
+
+	//벽1
+	hitboxRects[0].setSize({ 450.f, 30.f });
+	hitboxRects[0].setPosition({ 285.f, 720.f });
+
+	//벽2
+	hitboxRects[1].setSize({ 30.f, 300.f });
+	hitboxRects[1].setPosition({ 262.f, 450.f });
+
+	//벽3
+	hitboxRects[2].setSize({ 370.f, 30.f });
+	hitboxRects[2].setPosition({ 285.f, 450.f });
+
+	//벽4
+	hitboxRects[3].setSize({ 30.f, 190.f });
+	hitboxRects[3].setPosition({ 650.f, 450.f });
 
 	text->SetActive(false);
 
@@ -93,12 +125,29 @@ void Map002::Update(float dt)
 {
 	Scene::Update(dt);
 
-	sf::Vector2f pos = niko->GetPosition();
+	sf::Vector2f nikoPos = niko->GetPosition();
+	sf::Vector2f toiletPos = toilet->GetPosition();
+	sf::Vector2f bathPos = bath->GetPosition();
+	sf::Vector2f sinkPos = sink->GetPosition();
+	sf::Vector2f flowerPos = dryflower->GetPosition();
+
+	for (int i = 0; i < 4; i++)
+	{
+		rects[i] = hitboxRects[i].getGlobalBounds();
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		hitbox[i].UpdateTr(hitboxRects[i], rects[i]);
+	}
 
 	worldView.setSize({ 840, 680 });
-	worldView.setCenter(pos.x, pos.y);
+	worldView.setCenter(nikoPos.x, nikoPos.y);
 
 	sf::FloatRect doorRectHitBox = doorRect.getLocalBounds();
+	sf::FloatRect bathBound = bath->GetGlobalBounds();
+	sf::FloatRect flowerBound = flowerRect.getGlobalBounds();
+	sf::FloatRect nikoBound = niko->GetGlobalBounds();
 
 	HitBox& nikoHitBox = niko->GetHitBox();
 	HitBox& bathHitBox = bath->GetHitBox();
@@ -108,77 +157,168 @@ void Map002::Update(float dt)
 	HitBox doorHitBox;
 	doorHitBox.UpdateTr(doorRect, doorRectHitBox);
 
-	if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox))
-	{
-		niko->SetSpeed(0.f);
-	}
-
-	if (Utils::CheckCollision(nikoHitBox, sinkHitBox))
-	{
-		niko->SetSpeed(0.f);
-	}
-
+	//TOILET
 	if (Utils::CheckCollision(nikoHitBox, toiletHitBox))
 	{
+		// 충돌 방향 벡터 계산
+		sf::Vector2f direction = nikoPos - toiletPos;
+		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		if (magnitude != 0.f)
+			direction /= magnitude;
+
+		// 충돌 방향 계산 (X 또는 Y로 제한)
+		if (std::abs(direction.x) > std::abs(direction.y))
+		{
+			// 수평 충돌: 좌/우로만 밀림
+			direction.y = 0.f;
+		}
+		else
+		{
+			// 수직 충돌: 위/아래로만 밀림
+			direction.x = 0.f;
+		}
+
+		// Niko를 충돌 방향으로 밀어냄
+		niko->SetPosition(nikoPos + direction * 1.f);
 		niko->SetSpeed(0.f);
 	}
 
+	//BATH
 	if (Utils::CheckCollision(nikoHitBox, bathHitBox))
 	{
+		// 충돌 방향 벡터 계산
+		sf::Vector2f direction = nikoPos - bathPos;
+		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		if (magnitude != 0.f)
+			direction /= magnitude;
+
+		// 충돌 방향 계산 (X 또는 Y로 제한)
+		if (std::abs(direction.x) > std::abs(direction.y))
+		{
+			// 수평 충돌: 좌/우로만 밀림
+			direction.y = 0.f;
+		}
+		else
+		{
+			// 수직 충돌: 위/아래로만 밀림
+			direction.x = 0.f;
+		}
+
+		// Niko를 충돌 방향으로 밀어냄
+		niko->SetPosition(nikoPos + direction * 1.f);
 		niko->SetSpeed(0.f);
 	}
-	
-	if(getBranch == false)
+
+	//SINK
+	if (Utils::CheckCollision(nikoHitBox, sinkHitBox))
 	{
-		if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox) && InputMgr::GetKey(sf::Keyboard::Z))
+		// 충돌 방향 벡터 계산
+		sf::Vector2f direction = nikoPos - sinkPos;
+		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		if (magnitude != 0.f)
+			direction /= magnitude;
+
+		// 충돌 방향 계산 (X 또는 Y로 제한)
+		if (std::abs(direction.x) > std::abs(direction.y))
+		{
+			// 수평 충돌: 좌/우로만 밀림
+			direction.y = 0.f;
+		}
+		else
+		{
+			// 수직 충돌: 위/아래로만 밀림
+			direction.x = 0.f;
+		}
+
+		// Niko를 충돌 방향으로 밀어냄
+		niko->SetPosition(nikoPos + direction * 1.f);
+		niko->SetSpeed(0.f);
+	}
+
+	//FLOWER
+	if (getBranch == false && nikoBound.intersects(flowerBound))
+	{
+		if (isTextVisible == false && InputMgr::GetKey(sf::Keyboard::Z))
 		{
 			text->SetString("Get Branch!");
 			text->SetStringSize(50);
 			text->SetActive(true);
+			text->SetPosition({ nikoPos.x, nikoPos.y - 100.f });
 			niko->SetBranchGet();
-			niko->SetPosition({ pos.x - 1, pos.y });
 			niko->SetSpeed(0.f);
+			isTextVisible = true;
+			return;
 		}
-		else if (niko->IsGetBranch() == true && InputMgr::GetKeyDown(sf::Keyboard::Z))
+
+		if (text->IsActive() && InputMgr::GetKeyDown(sf::Keyboard::Z))
 		{
 			text->SetActive(false);
 			niko->SetSpeed(100.f);
+			isTextVisible = false;
+			getBranch = true;
 		}
 	}
 
-	if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox) && InputMgr::GetKey(sf::Keyboard::Left))
+	if (Utils::CheckCollision(nikoHitBox, dryflowerHitBox))
 	{
-		niko->SetSpeed(100.f);
+		// 충돌 방향 벡터 계산
+		sf::Vector2f direction = nikoPos - flowerPos;
+		float magnitude = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		if (magnitude != 0.f)
+			direction /= magnitude;
+
+		// 충돌 방향 계산 (X 또는 Y로 제한)
+		if (std::abs(direction.x) > std::abs(direction.y))
+		{
+			// 수평 충돌: 좌/우로만 밀림
+			direction.y = 0.f;
+		}
+		else
+		{
+			// 수직 충돌: 위/아래로만 밀림
+			direction.x = 0.f;
+		}
+
+		// Niko를 충돌 방향으로 밀어냄
+		niko->SetPosition(nikoPos + direction * 1.f);
+		niko->SetSpeed(0.f);
 	}
 
-	if (Utils::CheckCollision(nikoHitBox, sinkHitBox) && InputMgr::GetKey(sf::Keyboard::Down)
-		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
-	{
-		niko->SetSpeed(100.f);
-	}
-
-	if (Utils::CheckCollision(nikoHitBox, toiletHitBox) && InputMgr::GetKey(sf::Keyboard::Down)
-		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
-	{
-		niko->SetSpeed(100.f);
-	}
-
-	if (Utils::CheckCollision(nikoHitBox, bathHitBox) && InputMgr::GetKey(sf::Keyboard::Up)
-		|| InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right))
-	{
-		niko->SetSpeed(100.f);
-	}
-
+	//이동(방)
 	if (Utils::CheckCollision(nikoHitBox, doorHitBox))
 	{
 		niko->SetBeforeScene(2);
 		SCENE_MGR.ChangeScene(SceneIds::Map001);
+	}
 
+	//벽 충돌
+	if (Utils::CheckCollision(nikoHitBox, hitbox[0]))
+	{
+		niko->SetPosition({ nikoPos.x, nikoPos.y - 1 });
+	}
+
+	if (Utils::CheckCollision(nikoHitBox, hitbox[1]))
+	{
+		niko->SetPosition({ nikoPos.x + 1, nikoPos.y });
+	}
+
+	if (Utils::CheckCollision(nikoHitBox, hitbox[2]))
+	{
+		niko->SetPosition({ nikoPos.x, nikoPos.y + 1 });
+	}
+
+	if (Utils::CheckCollision(nikoHitBox, hitbox[3]))
+	{
+		niko->SetPosition({ nikoPos.x - 1, nikoPos.y });
 	}
 }
 
 void Map002::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	//window.draw(doorRect);
+	//window.draw(flowerRect);
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	window.draw(hitboxRects[i]);
+	//}
 }

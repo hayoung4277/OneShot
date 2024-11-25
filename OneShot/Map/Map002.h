@@ -22,12 +22,18 @@ protected:
 	Toilet* toilet;
 	ToiletSink* sink;
 
-	bool isCollision = false;
 	bool getBranch = false;
+	bool isTextVisible = false;
 
 	sf::RectangleShape doorRect;
 
-	sf::Vector2f mapScale = { 2.f, 2.f };
+	HitBox hitbox[4];
+	sf::RectangleShape hitboxRects[4];
+	sf::FloatRect rects[4];
+
+	sf::RectangleShape flowerRect;
+
+	sf::Vector2f mapScale = { 1.f, 1.f };
 
 public:
 	Map002();

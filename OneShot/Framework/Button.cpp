@@ -122,7 +122,10 @@ bool Button::IsCursorOn()
 	return rect.getGlobalBounds().contains(mousePos);
 }
 
-
+sf::String Button::GetText() const
+{
+	return text.getString();
+}
 
 void Button::Draw(sf::RenderWindow& window)
 {

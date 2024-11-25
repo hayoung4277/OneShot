@@ -4,8 +4,6 @@
 
 void Framework::Init(int width, int height, const std::string& name)
 {
-    FONT_MGR.Load("fonts/DS-DIGI.ttf");
-
 	window.create(sf::VideoMode(width, height), name);
     Utils::Init();
     SCENE_MGR.Init();
@@ -51,5 +49,4 @@ void Framework::Do()
 void Framework::Release()
 {
     SCENE_MGR.Release();
-    FONT_MGR.Unload("fonts/DS-DIGI.ttf");
 }

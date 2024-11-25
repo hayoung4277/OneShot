@@ -46,7 +46,7 @@ sf::Vector2f Computer::GetPositoin()
 
 void Computer::Init()
 {
-	std::string textureId = "Graphics/Characters/computer.png";
+	std::string textureId = "Graphics/MapSource/computer.png";
 }
 
 void Computer::Release()
@@ -55,15 +55,15 @@ void Computer::Release()
 
 void Computer::Reset()
 {
-	body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/computer.png"));
-	SetOrigin(Origins::MC);
+	body.setTexture(TEXTURE_MGR.Get("Graphics/MapSource/computer.png"));
+	SetOrigin(Origins::TL);
 }
 
 void Computer::Update(float dt)
 {
 	animator.Update(dt);
 
-	sf::FloatRect computerFloatRect = body.getLocalBounds();
+	sf::FloatRect computerFloatRect = body.getGlobalBounds();
 
 	hitbox.UpdateTr(body, computerFloatRect);
 }

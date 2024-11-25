@@ -66,6 +66,7 @@ void TV::Release()
 void TV::Reset()
 {
     body.setTexture(TEXTURE_MGR.Get("Graphics/Characters/TV.png"));
+    body.setTextureRect({ 0, 0, 64, 46 });
     SetOrigin(Origins::TL);
 }
 
