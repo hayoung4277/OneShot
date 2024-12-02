@@ -60,46 +60,97 @@
     <ClCompile Include="Map\Map001.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UiHud.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\UiUpgrade.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="guitar\AniPlayer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\Player.cpp">
+    <ClCompile Include="Framework\SaveData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\SaveData.cpp">
+    <ClCompile Include="Framework\SaveLoadMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\SaveLoadMgr.cpp">
+    <ClCompile Include="Map\SceneTitle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\SceneGame.cpp">
+    <ClCompile Include="Framework\SpriteButton.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\SceneTitle.cpp">
+    <ClCompile Include="Framework\AnimationClip.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\SpriteButton.cpp">
+    <ClCompile Include="Framework\Animator.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\TileMap.cpp">
+    <ClCompile Include="Character\Niko.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\AnimationClip.cpp">
+    <ClCompile Include="Item\map001\Remocon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\Animator.cpp">
+    <ClCompile Include="Item\map001\Computer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\Neko.cpp">
+    <ClCompile Include="Map\Map002.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="guitar\Remocon.cpp">
+    <ClCompile Include="UI\Message.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map001\BookCase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map003.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\TV.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\FirePlace.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\Sofa.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\Refrigerator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\Sink.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\Door.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\LightDoor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Inventory.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map002\Toilet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map002\Bath.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map002\DryFlower.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map002\ToiletSink.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\Fire.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map003\ItemStar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map004_1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map004_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\map004\Bulb.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,46 +215,97 @@
     <ClInclude Include="Map\Map001.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="UI\UiHud.h">
+    <ClInclude Include="Framework\Animator.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="UI\UiUpgrade.h">
+    <ClInclude Include="Framework\SaveData.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\Animator.h">
+    <ClInclude Include="Framework\SaveLoadMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\Player.h">
+    <ClInclude Include="Map\SceneTitle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\SaveData.h">
+    <ClInclude Include="Framework\SpriteButton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\SaveLoadMgr.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="guitar\SceneGame.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="guitar\SceneTitle.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="guitar\SpriteButton.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="guitar\TileMap.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="guitar\AnimationClip.h">
+    <ClInclude Include="Framework\AnimationClip.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="guitar\AniPlayer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\Neko.h">
+    <ClInclude Include="Character\Niko.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="guitar\Remocon.h">
+    <ClInclude Include="Item\map001\Remocon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map001\Computer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map002.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Message.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map001\BookCase.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map003.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\TV.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\FirePlace.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\Sofa.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\Refrigerator.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\Sink.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\Door.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\LightDoor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Inventory.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map002\Toilet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map002\Bath.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map002\DryFlower.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map002\ToiletSink.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\Fire.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map003\ItemStar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map004_1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map004_2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\map004\Bulb.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

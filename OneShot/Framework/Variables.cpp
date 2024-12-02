@@ -1,4 +1,4 @@
 #include "stdafx.h"
 #include "Variables.h"
 
-bool Variables::isDrawHitBox = false;
+bool Variables::isDrawHitBox = true;
